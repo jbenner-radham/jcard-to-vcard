@@ -1,0 +1,6 @@
+{
+  "eqeqeq": true,
+  "quotmark": "single",
+  "node": true,
+  "mocha": true
+}

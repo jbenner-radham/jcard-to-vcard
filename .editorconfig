@@ -1,0 +1,46 @@
+# EditorConfig is awesome: http://editorconfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Tab indentation for targets
+# @link <http://pubs.opengroup.org/onlinepubs/9699919799/utilities/make.html#tag_20_76_13_04>
+[{M,m}akefile]
+indent_style = tab
+
+# The indent size used in the `package.json` file cannot be changed
+# @link <https://github.com/npm/npm/pull/3180#issuecomment-16336516>
+[package.json]
+indent_size = 2
+indent_style = space
+
+[*.md]
+trim_trailing_whitespace = false
+
+# > Individual lines within vCard are delimited by the [RFC5322]
+# > line break, which is a CRLF sequence (U+000D followed by U+000A).
+#
+# > A logical line MAY be continued on the next physical line
+# > anywhere between two characters by inserting a CRLF immediately
+# > followed by a single white space character (space (U+0020)
+# > or horizontal tab (U+0009)).
+#
+# > Content lines SHOULD be folded to a maximum width of 75 octets,
+# > excluding the line break. Multi-octet characters MUST remain
+# > contiguous.
+# ---
+# @link <http://tools.ietf.org/html/rfc6350#section-3.2>
+# @link <https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#max_line_length>
+[*.{vcard,vcf}]
+end_of_line = crlf
+indent_style = space
+indent_size = 1
+max_line_length = 75
