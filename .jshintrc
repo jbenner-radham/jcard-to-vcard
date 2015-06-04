@@ -1,5 +1,6 @@
 {
   "eqeqeq": true,
+  "esnext": true,
   "quotmark": "single",
   "node": true,
   "mocha": true

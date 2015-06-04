@@ -1,14 +1,16 @@
 #!/usr/bin/env node
 
+'use strict';
+
 var fs = require('fs');
 var is = require('is_js');
-var dateTime = require('date-time');
+var dateTime = require('@radioactivehamster/date-time');
 
-const CRLF = "\r\n";
+const CRLF = '\r\n';
 
 //console.log(process.argv);
 var source = fs.readFileSync(process.argv[2], { encoding: 'utf8' });
-jcard = JSON.parse(source).pop();
+var jcard = JSON.parse(source).pop();
 ///console.log(jcard);
 
 var vcard = [ 'BEGIN:VCARD' ];
@@ -22,11 +24,14 @@ jcard.forEach(function (item) {
     ///if (Object.keys(param).length === 0) console.log('nope');
     ///else console.log('yep');
 
-    var line = `${prop}:`
+    var line = `${prop}:`;
 
-    if (type != 'text' && !(prop === 'LANG' && type === 'language-tag')
-        && !(prop === 'REV' && type === 'timestamp')) {
+    if (type !== 'text' && !(prop === 'LANG' && type === 'language-tag') &&
+        !(prop === 'REV' && type === 'timestamp')
+    ) {
         line += `TYPE=${type};`;
+    } else if (prop === 'RELATED') {
+        line += `TYPE=${param.type};`;
     }
 
     line += (prop === 'N') ? val.join(';') : val;
@@ -34,8 +39,6 @@ jcard.forEach(function (item) {
 });
 
 vcard[vcard.length] = 'VCARD:END';
-
-///console.log(vcard);
 
 console.log(vcard.join(CRLF));
 console.log(dateTime());
