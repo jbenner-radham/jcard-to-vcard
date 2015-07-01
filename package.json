@@ -1,25 +1,29 @@
 {
-  "name": "@radioactivehamster/jcard",
+  "name": "jcard-to-vcard",
   "version": "0.0.0",
   "description": "jCard magic thingy.",
-  "main": "index.js",
+  "main": "dist/cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "James Benner",
+  "keywords": [
+    "jCard",
+    "vCard",
+    "JSON"
+  ],
+  "author": "James Benner <james.benner@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "babel": "^5.2.15",
     "gulp": "^3.9.0",
+    "gulp-babel": "^5.1.0",
     "gulp-micro": "^1.0.2",
     "gulp-util": "^3.0.4",
-    "mocha": "^2.2.4",
-    "yeoman-assert": "^2.0.0"
+    "mocha": "^2.2.4"
   },
   "dependencies": {
     "@radioactivehamster/date-time": "^0.1.2",
     "is_js": "^0.7.4",
-    "sprintf-js": "^1.0.2",
-    "stringify-object": "^1.0.1"
+    "sprintf-js": "^1.0.2"
   }
 }
