@@ -1,4 +1,4 @@
-# EditorConfig is awesome: http://editorconfig.org
+EditorConfig is awesome <http://editorconfig.org>
 
 # top-most EditorConfig file
 root = true
@@ -11,13 +11,16 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+[*.hbs]
+insert_final_newline = false
+
 # Tab indentation for targets
-# @link <http://pubs.opengroup.org/onlinepubs/9699919799/utilities/make.html#tag_20_76_13_04>
+# @see <http://pubs.opengroup.org/onlinepubs/9699919799/utilities/make.html#tag_20_76_13_04>
 [{M,m}akefile]
 indent_style = tab
 
-# The indent size used in the `package.json` file cannot be changed
-# @link <https://github.com/npm/npm/pull/3180#issuecomment-16336516>
+# The indent size used in the "package.json" file cannot be changed
+# @see <https://github.com/npm/npm/pull/3180#issuecomment-16336516>
 [package.json]
 indent_size = 2
 indent_style = space
@@ -37,8 +40,8 @@ trim_trailing_whitespace = false
 # > excluding the line break. Multi-octet characters MUST remain
 # > contiguous.
 # ---
-# @link <http://tools.ietf.org/html/rfc6350#section-3.2>
-# @link <https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#max_line_length>
+# @see <http://tools.ietf.org/html/rfc6350#section-3.2>
+# @see <https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#max_line_length>
 [*.{vcard,vcf}]
 end_of_line = crlf
 indent_style = space

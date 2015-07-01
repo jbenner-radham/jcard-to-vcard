@@ -1,0 +1,30 @@
+{
+    "disallowSpaceAfterPrefixUnaryOperators": ["++", "--", "+", "-", "~", "!"],
+    "disallowSpaceBeforePostfixUnaryOperators": ["++", "--"],
+    "requireCapitalizedConstructors": true,
+    "requireCommaBeforeLineBreak": true,
+    "requirePaddingNewLinesAfterUseStrict": true,
+    "requireParenthesesAroundIIFE": true,
+    "requireSpaceAfterLineComment": true,
+    "requireSpaceBeforeBinaryOperators": [
+        "=", "+=", "-=", "*=", "/=", "%=",
+        "+", "-", "*", "/", "%", "&&",
+        "||", "===", "==", ">=", "<=",
+        "<", ">", "!=", "!=="
+    ],
+    "requireSpaceBeforeBlockStatements": true,
+    "requireSpacesInAnonymousFunctionExpression": {
+        "beforeOpeningRoundBrace": true,
+        "beforeOpeningCurlyBrace": true
+    },
+    "requireSpacesInConditionalExpression": true,
+    "requireSpacesInNamedFunctionExpression": {
+        "beforeOpeningRoundBrace": true,
+        "beforeOpeningCurlyBrace": true
+    },
+    "validateQuoteMarks": {
+        "mark": "'",
+        "escape": true
+    },
+    "validateIndentation": 4
+}

@@ -1,7 +1,18 @@
 {
-  "eqeqeq": true,
-  "esnext": true,
-  "quotmark": "single",
-  "node": true,
-  "mocha": true
+    "couch": true,
+    "mocha": true,
+    "node": true,
+    "esnext": true,
+    "bitwise": true,
+    "camelcase": true,
+    "curly": true,
+    "eqeqeq": true,
+    "eqnull": true,
+    "immed": true,
+    "newcap": true,
+    "noarg": true,
+    "undef": true,
+    "unused": true,
+    "strict": true
 }
+
