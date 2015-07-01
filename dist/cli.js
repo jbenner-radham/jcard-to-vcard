@@ -36,10 +36,10 @@ jcard.forEach(function (item) {
         line += 'TYPE=' + type + ';';
     }
 
-    line += prop === 'ADR' || prop === 'N' || prop === 'ORG' ? val.join(';') : val;
-
     // Escape commas
-    vcard.push(line.replace(',', '\\,'));
+    line += prop === 'ADR' || prop === 'N' || prop === 'ORG' ? val.join(';').replace(',', '\\,') : val;
+
+    vcard.push(line);
 });
 
 /**

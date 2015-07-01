@@ -40,11 +40,11 @@ jcard.forEach(item => {
         line += `TYPE=${type};`;
     }
 
-    line += (prop === 'ADR' || prop === 'N' || prop === 'ORG') ? val.join(';')
+    // Escape commas
+    line += (prop === 'ADR' || prop === 'N' || prop === 'ORG') ? val.join(';').replace(',', '\\,')
                                                                : val;
 
-    // Escape commas
-    vcard.push(line.replace(',', '\\,'));
+    vcard.push(line);
 });
 
 /**

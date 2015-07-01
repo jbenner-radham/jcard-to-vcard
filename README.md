@@ -31,8 +31,8 @@ node dist/cli.js my-jcard.json > my-new-vcard.vcf
 - [x] `LANG` property parsing
 - [x] `TZ` property parsing
 - [ ] `GEO` property parsing
-- [ ] `TITLE` property parsing
-- [ ] `ROLE` property parsing
+- [x] `TITLE` property parsing
+- [x] `ROLE` property parsing
 - [ ] `LOGO` property parsing
 - [x] `ORG` property parsing
 - [ ] `MEMBER` property parsing
@@ -50,6 +50,7 @@ node dist/cli.js my-jcard.json > my-new-vcard.vcf
 - [ ] `FBURL` property parsing
 - [ ] `CALADRURI` property parsing
 - [ ] `CALURI` property parsing
+- [ ] `PID` attribute parsing
 
 ## Reference
 
