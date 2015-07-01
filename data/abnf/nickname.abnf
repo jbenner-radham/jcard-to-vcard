@@ -1,0 +1,3 @@
+NICKNAME-param = "VALUE=text" / type-param / language-param
+               / altid-param / pid-param / pref-param / any-param
+NICKNAME-value = text-list

@@ -19,7 +19,7 @@ node dist/cli.js my-jcard.json > my-new-vcard.vcf
 - [ ] `XML` property parsing
 - [x] `FN` property parsing
 - [x] `N` property parsing
-- [ ] `NICKNAME` property parsing
+- [x] `NICKNAME` property parsing
 - [ ] `PHOTO` property parsing
 - [x] `BDAY` property parsing
 - [ ] `ANNIVERSARY` property parsing
@@ -51,6 +51,7 @@ node dist/cli.js my-jcard.json > my-new-vcard.vcf
 - [ ] `CALADRURI` property parsing
 - [ ] `CALURI` property parsing
 - [ ] `PID` attribute parsing
+- [ ] `TYPE` attribute parsing
 
 ## Reference
 
