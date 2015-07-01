@@ -10,7 +10,7 @@ const CRLF = '\r\n';
 var source = fs.readFileSync(process.argv[2], { encoding: 'utf8' });
 var jcard = JSON.parse(source).pop();
 
-console.log(jcard);
+// console.log(jcard);
 
 /**
  * vCard:
