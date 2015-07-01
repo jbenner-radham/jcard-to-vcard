@@ -55,4 +55,4 @@ jcard.forEach(function (item) {
 vcard[vcard.length] = 'VCARD:END';
 
 console.log(vcard.join(CRLF));
-console.log('\n-----\n\n> @' + dateTime());
+//console.log('\n-----\n\n> @' + dateTime());
