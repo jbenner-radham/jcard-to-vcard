@@ -1,0 +1,6 @@
+TZ-param = "VALUE=" ("text" / "uri" / "utc-offset")
+TZ-value = text / URI / utc-offset
+  ; Value and parameter MUST match.
+
+TZ-param =/ altid-param / pid-param / pref-param / type-param
+          / mediatype-param / any-param

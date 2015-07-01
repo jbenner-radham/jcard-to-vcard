@@ -1,0 +1,11 @@
+UID-param = UID-uri-param / UID-text-param
+UID-value = UID-uri-value / UID-text-value
+  ; Value and parameter MUST match.
+
+UID-uri-param = "VALUE=uri"
+UID-uri-value = URI
+
+UID-text-param = "VALUE=text"
+UID-text-value = text
+
+UID-param =/ any-param

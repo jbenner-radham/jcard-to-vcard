@@ -1,0 +1,3 @@
+PHOTO-param = "VALUE=uri" / altid-param / type-param
+            / mediatype-param / pref-param / pid-param / any-param
+PHOTO-value = URI

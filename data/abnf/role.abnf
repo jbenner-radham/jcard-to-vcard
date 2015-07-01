@@ -1,0 +1,3 @@
+ROLE-param = "VALUE=text" / language-param / pid-param / pref-param
+           / type-param / altid-param / any-param
+ROLE-value = text

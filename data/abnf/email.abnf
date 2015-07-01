@@ -1,0 +1,3 @@
+EMAIL-param = "VALUE=text" / pid-param / pref-param / type-param
+            / altid-param / any-param
+EMAIL-value = text

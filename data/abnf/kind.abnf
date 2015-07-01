@@ -1,0 +1,3 @@
+KIND-param = "VALUE=text" / any-param
+KIND-value = "individual" / "group" / "org" / "location"
+           / iana-token / x-name

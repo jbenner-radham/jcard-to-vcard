@@ -1,0 +1,2 @@
+CLIENTPIDMAP-param = any-param
+CLIENTPIDMAP-value = 1*DIGIT ";" URI

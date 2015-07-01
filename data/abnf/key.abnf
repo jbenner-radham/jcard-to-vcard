@@ -1,0 +1,12 @@
+KEY-param = KEY-uri-param / KEY-text-param
+KEY-value = KEY-uri-value / KEY-text-value
+  ; Value and parameter MUST match.
+
+KEY-uri-param = "VALUE=uri" / mediatype-param
+KEY-uri-value = URI
+
+KEY-text-param = "VALUE=text"
+KEY-text-value = text
+
+KEY-param =/ altid-param / pid-param / pref-param / type-param
+           / any-param

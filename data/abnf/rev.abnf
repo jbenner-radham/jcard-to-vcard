@@ -1,0 +1,2 @@
+REV-param = "VALUE=timestamp" / any-param
+REV-value = timestamp

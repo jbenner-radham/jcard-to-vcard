@@ -1,0 +1,2 @@
+BEGIN-param = 0" "  ; no parameter allowed
+BEGIN-value = "VCARD"

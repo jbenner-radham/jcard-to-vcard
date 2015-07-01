@@ -1,0 +1,16 @@
+label-param = "LABEL=" param-value
+
+ADR-param = "VALUE=text" / label-param / language-param
+          / geo-parameter / tz-parameter / altid-param / pid-param
+          / pref-param / type-param / any-param
+ADR-value = ADR-component-pobox ";" ADR-component-ext ";"
+            ADR-component-street ";" ADR-component-locality ";"
+            ADR-component-region ";" ADR-component-code ";"
+            ADR-component-country
+ADR-component-pobox    = list-component
+ADR-component-ext      = list-component
+ADR-component-street   = list-component
+ADR-component-locality = list-component
+ADR-component-region   = list-component
+ADR-component-code     = list-component
+ADR-component-country  = list-component

@@ -1,0 +1,2 @@
+PRODID-param = "VALUE=text" / any-param
+PRODID-value = text

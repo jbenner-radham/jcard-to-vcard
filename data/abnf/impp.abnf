@@ -1,0 +1,3 @@
+IMPP-param = "VALUE=uri" / pid-param / pref-param / type-param
+           / mediatype-param / altid-param / any-param
+IMPP-value = URI

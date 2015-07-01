@@ -1,0 +1,4 @@
+ORG-param = "VALUE=text" / sort-as-param / language-param
+          / pid-param / pref-param / altid-param / type-param
+          / any-param
+ORG-value = component *(";" component)

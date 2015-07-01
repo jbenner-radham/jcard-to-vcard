@@ -1,0 +1,3 @@
+LANG-param = "VALUE=language-tag" / pid-param / pref-param
+           / altid-param / type-param / any-param
+LANG-value = Language-Tag

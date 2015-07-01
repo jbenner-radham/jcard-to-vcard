@@ -1,0 +1,20 @@
+RELATED-param = RELATED-param-uri / RELATED-param-text
+RELATED-value = URI / text
+  ; Parameter and value MUST match.
+
+RELATED-param-uri = "VALUE=uri" / mediatype-param
+RELATED-param-text = "VALUE=text" / language-param
+
+RELATED-param =/ pid-param / pref-param / altid-param / type-param
+               / any-param
+
+type-param-related = related-type-value *("," related-type-value)
+  ; type-param-related MUST NOT be used with a property other than
+  ; RELATED.
+
+related-type-value = "contact" / "acquaintance" / "friend" / "met"
+                   / "co-worker" / "colleague" / "co-resident"
+                   / "neighbor" / "child" / "parent"
+                   / "sibling" / "spouse" / "kin" / "muse"
+                   / "crush" / "date" / "sweetheart" / "me"
+                   / "agent" / "emergency"

@@ -1,0 +1,3 @@
+N-param = "VALUE=text" / sort-as-param / language-param
+        / altid-param / any-param
+N-value = list-component 4(";" list-component)

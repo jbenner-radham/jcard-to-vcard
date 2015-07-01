@@ -1,0 +1,3 @@
+SOURCE-param = "VALUE=uri" / pid-param / pref-param / altid-param
+             / mediatype-param / any-param
+SOURCE-value = URI

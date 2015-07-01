@@ -1,0 +1,3 @@
+LOGO-param = "VALUE=uri" / language-param / pid-param / pref-param
+           / type-param / mediatype-param / altid-param / any-param
+LOGO-value = URI
