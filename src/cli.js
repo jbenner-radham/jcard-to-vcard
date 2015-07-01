@@ -1,16 +1,12 @@
 'use strict';
 
-var fs = require('fs');
-var is = require('is_js');
+var fs       = require('fs');
+var is       = require('is_js');
 var dateTime = require('@radioactivehamster/date-time');
 
 const CRLF = '\r\n';
-
-// console.log(process.argv);
-var source = fs.readFileSync(process.argv[2], { encoding: 'utf8' });
-var jcard = JSON.parse(source).pop();
-
-// console.log(jcard);
+var source = fs.readFileSync(process.argv[2]).toString();
+var jcard  = JSON.parse(source).pop();
 
 /**
  * vCard:
@@ -26,9 +22,7 @@ jcard.forEach(item => {
     var param = item[1];
     var type  = item[2];
     var val   = item[3];
-    ///if (Object.keys(param).length === 0) console.log('nope');
-
-    var line = `${prop}:`;
+    var line  = `${prop}:`;
 
     /**
      * > If the property's value type is the default type for that property, no
@@ -41,16 +35,23 @@ jcard.forEach(item => {
     } else if (type !== 'text' &&
         !(prop === 'BDAY' && type === 'date-and-or-time') &&
         !(prop === 'LANG' && type === 'language-tag') &&
-        !(prop === 'REV' && type === 'timestamp')
+        !(prop === 'REV'  && type === 'timestamp')
     ) {
         line += `TYPE=${type};`;
     }
 
-    line += (prop === 'N' || prop === 'ADR') ? val.join(';') : val;
-    vcard.push(line);
+    line += (prop === 'ADR' || prop === 'N' || prop === 'ORG') ? val.join(';')
+                                                               : val;
+
+    // Escape commas
+    vcard.push(line.replace(',', '\\,'));
 });
 
-vcard[vcard.length] = 'VCARD:END';
+/**
+ * ```abnf
+ * "END:VCARD" CRLF`
+ * ```
+ */
+vcard[vcard.length] = `VCARD:END${CRLF}`;
 
-console.log(vcard.join(CRLF));
-//console.log('\n-----\n\n> @' + dateTime());
+process.stdout.write(vcard.join(CRLF));

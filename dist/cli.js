@@ -5,12 +5,8 @@ var is = require('is_js');
 var dateTime = require('@radioactivehamster/date-time');
 
 var CRLF = '\r\n';
-
-// console.log(process.argv);
-var source = fs.readFileSync(process.argv[2], { encoding: 'utf8' });
+var source = fs.readFileSync(process.argv[2]).toString();
 var jcard = JSON.parse(source).pop();
-
-// console.log(jcard);
 
 /**
  * vCard:
@@ -26,8 +22,6 @@ jcard.forEach(function (item) {
     var param = item[1];
     var type = item[2];
     var val = item[3];
-    ///if (Object.keys(param).length === 0) console.log('nope');
-
     var line = prop + ':';
 
     /**
@@ -42,11 +36,17 @@ jcard.forEach(function (item) {
         line += 'TYPE=' + type + ';';
     }
 
-    line += prop === 'N' || prop === 'ADR' ? val.join(';') : val;
-    vcard.push(line);
+    line += prop === 'ADR' || prop === 'N' || prop === 'ORG' ? val.join(';') : val;
+
+    // Escape commas
+    vcard.push(line.replace(',', '\\,'));
 });
 
-vcard[vcard.length] = 'VCARD:END';
+/**
+ * ```abnf
+ * "END:VCARD" CRLF`
+ * ```
+ */
+vcard[vcard.length] = 'VCARD:END' + CRLF;
 
-console.log(vcard.join(CRLF));
-//console.log('\n-----\n\n> @' + dateTime());
+process.stdout.write(vcard.join(CRLF));

@@ -1,0 +1,9 @@
+[
+    "vcard",
+    [
+        [ "version", {}, "text", "4.0" ],
+        [ "kind",    {}, "text", "individual" ],
+        [ "fn",      {}, "text", "Jane Doe" ],
+        [ "org",     {}, "text", [ "ABC, Inc.", "North American Division", "Marketing" ] ]
+    ]
+]
