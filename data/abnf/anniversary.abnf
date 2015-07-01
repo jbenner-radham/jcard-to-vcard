@@ -1,0 +1,7 @@
+ANNIVERSARY-param = "VALUE=" ("date-and-or-time" / "text")
+ANNIVERSARY-value = date-and-or-time / text
+  ; Value and parameter MUST match.
+
+ANNIVERSARY-param =/ altid-param / calscale-param / any-param
+  ; calscale-param can only be present when ANNIVERSARY-value is
+  ; date-and-or-time and actually contains a date or date-time.

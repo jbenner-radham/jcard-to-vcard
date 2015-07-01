@@ -1,0 +1,10 @@
+BDAY-param = BDAY-param-date / BDAY-param-text
+BDAY-value = date-and-or-time / text
+  ; Value and parameter MUST match.
+
+BDAY-param-date = "VALUE=date-and-or-time"
+BDAY-param-text = "VALUE=text" / language-param
+
+BDAY-param =/ altid-param / calscale-param / any-param
+  ; calscale-param can only be present when BDAY-value is
+  ; date-and-or-time and actually contains a date or date-time.

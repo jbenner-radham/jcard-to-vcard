@@ -11,19 +11,12 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.hbs]
-insert_final_newline = false
-
-# Tab indentation for targets
-# @see <http://pubs.opengroup.org/onlinepubs/9699919799/utilities/make.html#tag_20_76_13_04>
-[{M,m}akefile]
-indent_style = tab
-
-# The indent size used in the "package.json" file cannot be changed
-# @see <https://github.com/npm/npm/pull/3180#issuecomment-16336516>
-[package.json]
+[*.abnf]
 indent_size = 2
 indent_style = space
+
+[*.hbs]
+insert_final_newline = false
 
 [*.md]
 trim_trailing_whitespace = false
@@ -44,6 +37,17 @@ trim_trailing_whitespace = false
 # @see <https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#max_line_length>
 [*.{vcard,vcf}]
 end_of_line = crlf
-indent_style = space
 indent_size = 1
+indent_style = space
 max_line_length = 75
+
+# Tab indentation for targets
+# @see <http://pubs.opengroup.org/onlinepubs/9699919799/utilities/make.html#tag_20_76_13_04>
+[{M,m}akefile]
+indent_style = tab
+
+# The indent size used in the "package.json" file cannot be changed
+# @see <https://github.com/npm/npm/pull/3180#issuecomment-16336516>
+[package.json]
+indent_size = 2
+indent_style = space
