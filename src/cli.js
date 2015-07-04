@@ -22,7 +22,7 @@ jcard.forEach(item => {
      * > "VALUE" parameter is included.
      */
     if (prop === 'TEL') {
-        line += `VALUE=${type};TYPE="${param.type.join(',')}":`;
+        line += `VALUE=${type};TYPE=${param.type.join(',')}:`;
     } else if (prop === 'RELATED') {
         line += `TYPE=${param.type};`;
     } else if (type !== 'text' &&

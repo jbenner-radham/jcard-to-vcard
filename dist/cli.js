@@ -22,7 +22,7 @@ jcard.forEach(function (item) {
      * > "VALUE" parameter is included.
      */
     if (prop === 'TEL') {
-        line += 'VALUE=' + type + ';TYPE="' + param.type.join(',') + '":';
+        line += 'VALUE=' + type + ';TYPE=' + param.type.join(',') + ':';
     } else if (prop === 'RELATED') {
         line += 'TYPE=' + param.type + ';';
     } else if (type !== 'text' && !(prop === 'BDAY' && type === 'date-and-or-time') && !(prop === 'LANG' && type === 'language-tag') && !(prop === 'REV' && type === 'timestamp')) {

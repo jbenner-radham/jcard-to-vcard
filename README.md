@@ -57,6 +57,7 @@ node dist/cli.js my-jcard.json > my-new-vcard.vcf
 - [ ] `PID` parameter parsing
 - [ ] `PREF` parameter parsing
 - [ ] `TYPE` parameter parsing
+- [ ] `VALUE` parameter parsing
 
 ## Reference
 

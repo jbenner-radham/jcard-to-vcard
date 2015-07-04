@@ -7,7 +7,6 @@
     "curly": true,
     "eqeqeq": true,
     "eqnull": true,
-    "immed": true,
     "newcap": true,
     "noarg": true,
     "undef": true,

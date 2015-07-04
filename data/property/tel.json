@@ -1,0 +1,19 @@
+{
+    "default": {
+        "type": "voice",
+        "value": "text"
+    },
+    "parameter": [
+        "pref",
+        "type"
+    ],
+    "type": [
+        "text",
+        "voice",
+        "fax",
+        "cell",
+        "video",
+        "pager",
+        "textphone"
+    ]
+}
