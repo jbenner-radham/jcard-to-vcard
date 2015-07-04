@@ -1,7 +1,7 @@
 'use strict';
 
 var fs = require('fs');
-// var is = require('is_js');
+var is = require('is_js');
 
 require('babel/polyfill');
 
@@ -34,9 +34,23 @@ jcard.forEach(item => {
     }
 
     // Join "Structured Property Values" on applicable properties
-    line += ['ADR', 'GENDER', 'N', 'ORG'].includes(prop) && Array.isArray(val)
-        ? val.join(';').replace(',', '\\,')
+    // <https://html.spec.whatwg.org/multipage/microdata.html#escaping-the-vcard-text-string>
+    line += ['ADR', 'GENDER', 'N', 'ORG'].includes(prop) && is.array(val) /* alternately: `Array.isArray(val)` */
+        ? val.join(';').replace('\\', '\\\\').replace(',', '\\,')
         : val;
+
+    /**
+     * > Content lines SHOULD be folded to a maximum width of 75 octets,
+     * > excluding the line break.  Multi-octet characters MUST remain
+     * > contiguous.
+     * @see Perreault, S., "vCard Format Specification", RFC 6350
+     *      § 3.2 "Line Delimiting and Folding"
+     *      DOI 10.17487/RFC6350, August 2011,
+     *      <http://www.rfc-editor.org/info/rfc6350>.
+     */
+    if (Buffer.byteLength(line) > 75) {
+        // ...
+    }
 
     vcard.push(line);
 });
