@@ -27,11 +27,11 @@ node dist/cli.js my-jcard.json > my-new-vcard.vcf
 - [x] `END` property parsing
 - [ ] `FBURL` property parsing
 - [x] `FN` property parsing
-- [ ] `GENDER` property parsing
+- [x] `GENDER` property parsing
 - [ ] `GEO` property parsing
 - [x] `IMPP` property parsing
 - [x] `KEY` property parsing
-- [ ] `KIND` property parsing
+- [x] `KIND` property parsing
 - [x] `LANG` property parsing
 - [ ] `LOGO` property parsing
 - [ ] `MEMBER` property parsing
@@ -64,4 +64,3 @@ node dist/cli.js my-jcard.json > my-new-vcard.vcf
 - [vCard Format Specification](http://tools.ietf.org/html/rfc6350)
 - [Parameter Value Encoding in iCalendar and vCard](http://tools.ietf.org/html/rfc6868)
 - [jCard: The JSON Format for vCard](http://tools.ietf.org/html/rfc7095)
-
