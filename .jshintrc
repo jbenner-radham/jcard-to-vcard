@@ -1,5 +1,4 @@
 {
-    "couch": true,
     "mocha": true,
     "node": true,
     "esnext": true,
@@ -15,4 +14,3 @@
     "unused": true,
     "strict": true
 }
-

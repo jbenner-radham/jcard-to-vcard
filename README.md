@@ -16,12 +16,12 @@ node dist/cli.js my-jcard.json > my-new-vcard.vcf
 ## To-do
 
 - [x] `ADR` property parsing
-- [ ] `ANNIVERSARY` property parsing
+- [x] `ANNIVERSARY` property parsing
 - [x] `BDAY` property parsing
 - [x] `BEGIN` property parsing
-- [ ] `CALADRURI` property parsing
-- [ ] `CALURI` property parsing
-- [ ] `CATEGORIES` property parsing
+- [x] `CALADRURI` property parsing
+- [x] `CALURI` property parsing
+- [x] `CATEGORIES` property parsing
 - [ ] `CLIENTPIDMAP` property parsing
 - [x] `EMAIL` property parsing
 - [x] `END` property parsing
@@ -29,8 +29,8 @@ node dist/cli.js my-jcard.json > my-new-vcard.vcf
 - [x] `FN` property parsing
 - [ ] `GENDER` property parsing
 - [ ] `GEO` property parsing
-- [ ] `IMPP` property parsing
-- [ ] `KEY` property parsing
+- [x] `IMPP` property parsing
+- [x] `KEY` property parsing
 - [ ] `KIND` property parsing
 - [x] `LANG` property parsing
 - [ ] `LOGO` property parsing
@@ -53,9 +53,10 @@ node dist/cli.js my-jcard.json > my-new-vcard.vcf
 - [ ] `URL` property parsing
 - [ ] `VERSION` property parsing
 - [ ] `XML` property parsing
-- [ ] `PID` attribute parsing
-- [ ] `PREF` attribute parsing
-- [ ] `TYPE` attribute parsing
+- [ ] `MEDIATYPE` parameter parsing
+- [ ] `PID` parameter parsing
+- [ ] `PREF` parameter parsing
+- [ ] `TYPE` parameter parsing
 
 ## Reference
 

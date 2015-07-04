@@ -1,20 +1,13 @@
 'use strict';
 
 var fs = require('fs');
-var is = require('is_js');
-var dateTime = require('@radioactivehamster/date-time');
+// var is = require('is_js');
+
+require('babel/polyfill');
 
 var CRLF = '\r\n';
 var source = fs.readFileSync(process.argv[2]).toString();
 var jcard = JSON.parse(source).pop();
-
-/**
- * vCard:
- * @see http://tools.ietf.org/html/rfc6350
- *
- * jCard:
- * @see http://tools.ietf.org/html/rfc7095
- */
 var vcard = ['BEGIN:VCARD'];
 
 jcard.forEach(function (item) {
@@ -36,8 +29,8 @@ jcard.forEach(function (item) {
         line += 'TYPE=' + type + ';';
     }
 
-    // Escape commas
-    line += prop === 'ADR' || prop === 'N' || prop === 'ORG' ? val.join(';').replace(',', '\\,') : val;
+    // Join "Structured Property Values" on applicable properties
+    line += ['ADR', 'GENDER', 'N', 'ORG'].includes(prop) && Array.isArray(val) ? val.join(';').replace(',', '\\,') : val;
 
     vcard.push(line);
 });
