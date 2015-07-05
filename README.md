@@ -1,67 +1,80 @@
 # jcard-to-vcard
 
-A jCard to vCard converter. Currently CLI only but will have a programmatic
+> A jCard to vCard converter. Currently CLI only but will have a programmatic
 module interface in the future.
 
 ## Heads Up!
 
-This is still very much a WIP project.
+This is still very much a WIP project and is __*not*__ production ready.
 
 ## Usage
 
 ```sh
-node dist/cli.js my-jcard.json > my-new-vcard.vcf
+$ node dist/cli.js my-jcard.json > my-new-vcard.vcf
 ```
 
 ## To-do
 
-- [x] `ADR` property parsing
-- [x] `ANNIVERSARY` property parsing
-- [x] `BDAY` property parsing
-- [x] `BEGIN` property parsing
-- [x] `CALADRURI` property parsing
-- [x] `CALURI` property parsing
-- [x] `CATEGORIES` property parsing
-- [ ] `CLIENTPIDMAP` property parsing
-- [x] `EMAIL` property parsing
-- [x] `END` property parsing
-- [ ] `FBURL` property parsing
-- [x] `FN` property parsing
-- [x] `GENDER` property parsing
-- [ ] `GEO` property parsing
-- [x] `IMPP` property parsing
-- [x] `KEY` property parsing
-- [x] `KIND` property parsing
-- [x] `LANG` property parsing
-- [ ] `LOGO` property parsing
-- [ ] `MEMBER` property parsing
-- [x] `N` property parsing
-- [x] `NICKNAME` property parsing
-- [x] `NOTE` property parsing
-- [x] `ORG` property parsing
-- [ ] `PHOTO` property parsing
-- [x] `PRODID` property parsing
-- [x] `RELATED` property parsing
-- [x] `REV` property parsing
-- [x] `ROLE` property parsing
-- [ ] `SOUND` property parsing
-- [ ] `SOURCE` property parsing
-- [x] `TEL` property parsing
-- [x] `TITLE` property parsing
-- [x] `TZ` property parsing
-- [ ] `UID` property parsing
-- [ ] `URL` property parsing
-- [ ] `VERSION` property parsing
-- [ ] `XML` property parsing
-- [ ] `MEDIATYPE` parameter parsing
-- [ ] `PID` parameter parsing
-- [ ] `PREF` parameter parsing
-- [ ] `TYPE` parameter parsing
-- [ ] `VALUE` parameter parsing
+- [ ] Property Parsing
+  - [x] `ADR`
+  - [x] `ANNIVERSARY`
+  - [x] `BDAY`
+  - [x] `BEGIN`
+  - [x] `CALADRURI`
+  - [x] `CALURI`
+  - [x] `CATEGORIES`
+  - [ ] `CLIENTPIDMAP`
+  - [x] `EMAIL`
+  - [x] `END`
+  - [ ] `FBURL`
+  - [x] `FN`
+  - [x] `GENDER`
+  - [ ] `GEO`
+  - [x] `IMPP`
+  - [x] `KEY`
+  - [x] `KIND`
+  - [x] `LANG`
+  - [ ] `LOGO`
+  - [ ] `MEMBER`
+  - [x] `N`
+  - [x] `NICKNAME`
+  - [x] `NOTE`
+  - [x] `ORG`
+  - [ ] `PHOTO`
+  - [x] `PRODID`
+  - [x] `RELATED`
+  - [x] `REV`
+  - [x] `ROLE`
+  - [ ] `SOUND`
+  - [x] `SOURCE`
+  - [x] `TEL`
+  - [x] `TITLE`
+  - [x] `TZ`
+  - [ ] `UID`
+  - [ ] `URL`
+  - [ ] `VERSION`
+  - [ ] `XML`
+- [ ] Parameter Parsing
+  - [ ] `ALTID`
+  - [ ] `CALSCALE`
+  - [ ] `GEO`
+  - [ ] `LANGUAGE`
+  - [ ] `MEDIATYPE`
+  - [ ] `PID`
+  - [ ] `PREF`
+  - [ ] `SORT-AS`
+  - [ ] `TYPE`
+  - [ ] `TZ`
+  - [ ] `VALUE`
 
 ## Reference
 
 - [Augmented BNF for Syntax Specifications: ABNF](http://tools.ietf.org/html/rfc5234)
 - [vCard Format Specification](http://tools.ietf.org/html/rfc6350)
+  - [Errata](http://www.rfc-editor.org/errata_search.php?rfc=6350)
 - [Parameter Value Encoding in iCalendar and vCard](http://tools.ietf.org/html/rfc6868)
 - [jCard: The JSON Format for vCard](http://tools.ietf.org/html/rfc7095)
+
+## License
+
+This project is licensed under the terms of the [MIT](https://www.tldrlegal.com/l/mit)  license. You can view the full license [here](README.md)
