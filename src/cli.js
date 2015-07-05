@@ -1,9 +1,11 @@
 'use strict';
 
+require('babel/polyfill');
+
 var fs = require('fs');
 var is = require('is_js');
+var isVcardProperty = require('./lib/is-vcard-property.js')
 
-require('babel/polyfill');
 
 const CRLF = '\r\n';
 var source = fs.readFileSync(process.argv[2]).toString();
@@ -63,3 +65,4 @@ jcard.forEach(item => {
 vcard[vcard.length] = `VCARD:END${CRLF}`;
 
 process.stdout.write(vcard.join(CRLF));
+console.log(isVcardProperty('TEL'));

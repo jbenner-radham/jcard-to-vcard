@@ -74,7 +74,8 @@ $ node dist/cli.js my-jcard.json > my-new-vcard.vcf
   - [Errata](http://www.rfc-editor.org/errata_search.php?rfc=6350)
 - [Parameter Value Encoding in iCalendar and vCard](http://tools.ietf.org/html/rfc6868)
 - [jCard: The JSON Format for vCard](http://tools.ietf.org/html/rfc7095)
+- [vCard Elements (IANA Protocol Registry)](http://www.iana.org/assignments/vcard-elements/vcard-elements.xhtml)
 
 ## License
 
-This project is licensed under the terms of the [MIT](https://www.tldrlegal.com/l/mit)  license. You can view the full license [here](README.md)
+This project is licensed under the terms of the [MIT License](https://www.tldrlegal.com/l/mit)  license. You can view the full license [here](README.md)
