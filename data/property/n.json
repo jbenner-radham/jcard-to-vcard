@@ -1,0 +1,10 @@
+{
+    "value": "structured text value",
+    "components": [
+        "family-name",
+        "given-name",
+        "additional-name",
+        "honorific-prefix",
+        "honorific-suffix"
+    ]
+}
