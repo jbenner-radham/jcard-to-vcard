@@ -12,10 +12,12 @@
     "type": [
         "cell",
         "fax",
+        "home",
+        "pager",
         "text",
+        "textphone",
         "video",
         "voice",
-        "pager",
-        "textphone"
+        "work"
     ]
 }

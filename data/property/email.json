@@ -1,0 +1,13 @@
+{
+    "value": "text",
+    "parameters": [
+        "altid",
+        "pid",
+        "pref",
+        "type"
+    ],
+    "type": [
+        "home",
+        "work"
+    ]
+}

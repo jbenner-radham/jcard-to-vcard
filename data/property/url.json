@@ -1,0 +1,14 @@
+{
+    "value": "uri",
+    "parameters": [
+        "altid",
+        "mediatype",
+        "pid",
+        "pref",
+        "type"
+    ],
+    "type": [
+        "home",
+        "work"
+    ]
+}
