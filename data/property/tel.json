@@ -3,16 +3,18 @@
         "type": "voice",
         "value": "text"
     },
-    "parameter": [
+    "parameters": [
+        "altid",
+        "pid",
         "pref",
         "type"
     ],
     "type": [
-        "text",
-        "voice",
-        "fax",
         "cell",
+        "fax",
+        "text",
         "video",
+        "voice",
         "pager",
         "textphone"
     ]

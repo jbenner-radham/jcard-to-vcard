@@ -1,4 +1,9 @@
 {
+    "parameters": [
+        "altid",
+        "language",
+        "sort-as"
+    ],
     "value": "structured text value",
     "components": [
         "family-name",

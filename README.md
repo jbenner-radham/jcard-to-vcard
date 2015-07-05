@@ -40,7 +40,7 @@ $ node dist/cli.js my-jcard.json > my-new-vcard.vcf
   - [x] `NICKNAME`
   - [x] `NOTE`
   - [x] `ORG`
-  - [ ] `PHOTO`
+  - [x] `PHOTO`
   - [x] `PRODID`
   - [x] `RELATED`
   - [x] `REV`
