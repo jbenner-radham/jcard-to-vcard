@@ -5,9 +5,13 @@ require('babel/polyfill');
 var chalk = require('chalk');
 var fs = require('fs');
 var is = require('is_js');
+
+var isValidOctetWidth = require('./lib/is-valid-octet-width.js');
 var isVcardProperty = require('./lib/is-vcard-property.js');
 
 var CRLF = '\r\n';
+var MAX_OCTETS = 75;
+
 var source = fs.readFileSync(process.argv[2]).toString();
 var jcard = JSON.parse(source).pop();
 var vcard = ['BEGIN:VCARD'];
@@ -24,7 +28,8 @@ jcard.forEach(function (item) {
     var valueType = null;
 
     try {
-        valueType = require(__dirname + '/../data/property/' + prop.toLowerCase() + '.json').value;
+        var definition = __dirname + '/../data/property/' + prop.toLowerCase() + '.json';
+        valueType = require(definition).value;
         // -- console.log(chalk.bold.yellow(valueType));
     } catch (_e) {}
 
@@ -35,7 +40,7 @@ jcard.forEach(function (item) {
         'value-type': valueType
     };
 
-    // !!! // console.log(chalk.green(JSON.stringify(property, null, 4)));
+    // - console.log(chalk.green(JSON.stringify(property, null, 4)));
 
     // -- console.info(chalk.green(type));
 
@@ -84,27 +89,16 @@ jcard.forEach(function (item) {
     // <http://tools.ietf.org/html/rfc6350#section-3.4>
     line += ':';
     line += ['ADR', 'GENDER', 'N', 'ORG'].includes(prop) && is.array(val) /* alternately: `Array.isArray(val)` */
-    ? val.join(';') // .replace(/\n/g, '\\n').replace(',', '\\,').replace('\\', '\\\\')
-    : val;
+    ? val.join(';') : val;
 
-    /**
-     * > Content lines SHOULD be folded to a maximum width of 75 octets,
-     * > excluding the line break.  Multi-octet characters MUST remain
-     * > contiguous.
-     * @see [RFC 6350 sec. 3.2 "Line Delimiting and Folding"]{@link http://www.rfc-editor.org/info/rfc6350}
-     */
-    if (Buffer.byteLength(line) > 75) {
-        console.warn(chalk.red.bold('[ERROR]') + ' ' + ('The line "' + chalk.red.underline(line) + '" ') + ('is ' + chalk.bold.red(Buffer.byteLength(line)) + ' octets. ') + 'The maximum allowed is ' + (chalk.bold(75) + '.'));
+    if (!isValidOctetWidth(line)) {
+        console.error(chalk.red.bold('[ERROR]') + ' ' + ('The line "' + chalk.red(line) + '" ') + ('is ' + chalk.bold.red(Buffer.byteLength(line)) + ' octets. ') + ('A maximum of ' + chalk.bold(MAX_OCTETS) + ' octets are allowed per line.'));
+        process.exit(1);
     }
 
     vcard.push(line);
 });
 
-/**
- * ```abnf
- * "END:VCARD" CRLF`
- * ```
- */
 vcard[vcard.length] = 'VCARD:END' + CRLF;
 
 process.stdout.write(vcard.join(CRLF));
