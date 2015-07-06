@@ -6,7 +6,7 @@ var chalk = require('chalk');
 var fs    = require('fs');
 var is    = require('is_js');
 
-var isValidOctetWidth = require('./lib/is-valid-octet-width.js');
+var isValidOctetSize = require('./lib/is-valid-octet-size.js');
 var isVcardProperty   = require('./lib/is-vcard-property.js');
 var vco = require('./lib/vcard.js');
 
@@ -19,27 +19,18 @@ var vcard  = [ 'BEGIN:VCARD' ];
 
 jcard.forEach(item => {
     let components = [];
-    let prop       = item[0].toUpperCase();
-    let param      = item[1];
-    let type       = item[2];
-    let val        = item[3];
+
+    // Using array destructuring now...
+    let [prop, param, type, val] = item;
 
     /** `contentline = [group "."] name *(";" param) ":" value CRLF` */
     let line      = `${prop}`;
     let valueType = null;
 
     try {
-        let definition = `${__dirname}/../data/property/${prop.toLowerCase()}.json`
+        let definition = `${__dirname}/../data/property/${prop.toLowerCase()}.json`;
         valueType = require(definition).value;
-        // -- console.log(chalk.bold.yellow(valueType));
     } catch (_e) {}
-
-    /*let property = {
-        name:      prop,
-        parameter: param,
-        value:     val,
-        'value-type': valueType
-    };*/
 
     let property = new vco.Property({
         name:       prop,
@@ -48,11 +39,9 @@ jcard.forEach(item => {
         valueType:  valueType
     });
 
-    console.log(chalk.green(JSON.stringify(property, null, 4)));
-    console.log(property.toString());
-    // console.log(chalk.yellow(new vco.Oh()._keys()));
-
-    // -- console.info(chalk.green(type));
+    // [!!!]
+    /*console.log(chalk.green(JSON.stringify(property, null, 4)));
+    console.log(property.toString());*/
 
     function escapePropertyValue(str) {
         /** PROTIP: The order of this chain is very important! */
@@ -72,10 +61,11 @@ jcard.forEach(item => {
     }
 
     if (['date', 'time', 'date-time', 'date-and-or-time', 'timestamp'].includes(type)) {
-        // console.info(chalk.bold.underline(`${prop}: ${val}`));
         /**
          * jCard supports ISO 8601 "extended format" however vCard does not
          * so collapse any date/time types.
+         *
+         * @see [RFC6350], Section 4.3
          */
         val = val.replace(/-/g, '');
     }
@@ -83,19 +73,12 @@ jcard.forEach(item => {
     /**
      * > If the property's value type is the default type for that property, no
      * > "VALUE" parameter is included.
+     * [is this an actual quote ???????]
      */
     if (prop === 'TEL') {
         if (type == 'uri') {
             components.push(`VALUE=${type}`);
         }
-    } else if (prop === 'URL') {
-        /*console.log(JSON.stringify({
-            prop:  prop,
-            param: param,
-            type:  type,
-            val:   val,
-            _line: line
-        }, null, 4));*/
     } else if (type !== 'text' &&
         !(prop === 'BDAY' && type === 'date-and-or-time') &&
         !(prop === 'LANG' && type === 'language-tag') &&
@@ -111,14 +94,13 @@ jcard.forEach(item => {
     // Join "Structured Property Values" on applicable properties
     // <https://html.spec.whatwg.org/multipage/microdata.html#escaping-the-vcard-text-string>
     // ---
-    // "Property Value Escaping"
-    // <http://tools.ietf.org/html/rfc6350#section-3.4>
+    // @see [RFC6350], Section 3.4 "Property Value Escaping"
     line += ':';
     line += ['ADR', 'GENDER', 'N', 'ORG'].includes(prop) && is.array(val) /* alternately: `Array.isArray(val)` */
         ? val.join(';')
         : val;
 
-    if (!isValidOctetWidth(line)) {
+    if (!isValidOctetSize(line)) {
         console.error(
             `${chalk.red.bold('[ERROR]')} ` +
             `The line "${chalk.red(line)}" ` +
@@ -134,3 +116,16 @@ jcard.forEach(item => {
 vcard[vcard.length] = `VCARD:END${CRLF}`;
 
 process.stdout.write(vcard.join(vco.CRLF));
+
+/**
+ * Normative References
+ * --------------------
+ *
+ * [RFC6350] Perreault, S., "vCard Format Specification", RFC 6350,
+ *           DOI 10.17487/RFC6350, August 2011,
+ *           <http://www.rfc-editor.org/info/rfc6350>.
+ *
+ * [RFC7095] Kewisch, P., "jCard: The JSON Format for vCard", RFC 7095,
+ *           DOI 10.17487/RFC7095, January 2014,
+ *           <http://www.rfc-editor.org/info/rfc7095>.
+ */

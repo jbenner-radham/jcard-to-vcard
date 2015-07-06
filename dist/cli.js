@@ -1,12 +1,14 @@
 'use strict';
 
+var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
+
 require('babel/polyfill');
 
 var chalk = require('chalk');
 var fs = require('fs');
 var is = require('is_js');
 
-var isValidOctetWidth = require('./lib/is-valid-octet-width.js');
+var isValidOctetSize = require('./lib/is-valid-octet-size.js');
 var isVcardProperty = require('./lib/is-vcard-property.js');
 var vco = require('./lib/vcard.js');
 
@@ -19,10 +21,15 @@ var vcard = ['BEGIN:VCARD'];
 
 jcard.forEach(function (item) {
     var components = [];
-    var prop = item[0].toUpperCase();
-    var param = item[1];
-    var type = item[2];
-    var val = item[3];
+
+    // Using array destructuring now...
+
+    var _item = _slicedToArray(item, 4);
+
+    var prop = _item[0];
+    var param = _item[1];
+    var type = _item[2];
+    var val = _item[3];
 
     /** `contentline = [group "."] name *(";" param) ":" value CRLF` */
     var line = '' + prop;
@@ -31,15 +38,7 @@ jcard.forEach(function (item) {
     try {
         var definition = __dirname + '/../data/property/' + prop.toLowerCase() + '.json';
         valueType = require(definition).value;
-        // -- console.log(chalk.bold.yellow(valueType));
     } catch (_e) {}
-
-    /*let property = {
-        name:      prop,
-        parameter: param,
-        value:     val,
-        'value-type': valueType
-    };*/
 
     var property = new vco.Property({
         name: prop,
@@ -48,11 +47,9 @@ jcard.forEach(function (item) {
         valueType: valueType
     });
 
-    console.log(chalk.green(JSON.stringify(property, null, 4)));
-    console.log(property.toString());
-    // console.log(chalk.yellow(new vco.Oh()._keys()));
-
-    // -- console.info(chalk.green(type));
+    // [!!!]
+    /*console.log(chalk.green(JSON.stringify(property, null, 4)));
+    console.log(property.toString());*/
 
     function escapePropertyValue(str) {
         /** PROTIP: The order of this chain is very important! */
@@ -68,10 +65,11 @@ jcard.forEach(function (item) {
     }
 
     if (['date', 'time', 'date-time', 'date-and-or-time', 'timestamp'].includes(type)) {
-        // console.info(chalk.bold.underline(`${prop}: ${val}`));
         /**
          * jCard supports ISO 8601 "extended format" however vCard does not
          * so collapse any date/time types.
+         *
+         * @see [RFC6350], Section 4.3
          */
         val = val.replace(/-/g, '');
     }
@@ -79,12 +77,13 @@ jcard.forEach(function (item) {
     /**
      * > If the property's value type is the default type for that property, no
      * > "VALUE" parameter is included.
+     * [is this an actual quote ???????]
      */
     if (prop === 'TEL') {
         if (type == 'uri') {
             components.push('VALUE=' + type);
         }
-    } else if (prop === 'URL') {} else if (type !== 'text' && !(prop === 'BDAY' && type === 'date-and-or-time') && !(prop === 'LANG' && type === 'language-tag') && !(prop === 'REV' && type === 'timestamp')) {
+    } else if (type !== 'text' && !(prop === 'BDAY' && type === 'date-and-or-time') && !(prop === 'LANG' && type === 'language-tag') && !(prop === 'REV' && type === 'timestamp')) {
         line += ';TYPE=' + type;
     }
 
@@ -95,13 +94,12 @@ jcard.forEach(function (item) {
     // Join "Structured Property Values" on applicable properties
     // <https://html.spec.whatwg.org/multipage/microdata.html#escaping-the-vcard-text-string>
     // ---
-    // "Property Value Escaping"
-    // <http://tools.ietf.org/html/rfc6350#section-3.4>
+    // @see [RFC6350], Section 3.4 "Property Value Escaping"
     line += ':';
     line += ['ADR', 'GENDER', 'N', 'ORG'].includes(prop) && is.array(val) /* alternately: `Array.isArray(val)` */
     ? val.join(';') : val;
 
-    if (!isValidOctetWidth(line)) {
+    if (!isValidOctetSize(line)) {
         console.error(chalk.red.bold('[ERROR]') + ' ' + ('The line "' + chalk.red(line) + '" ') + ('is ' + chalk.bold.red(Buffer.byteLength(line)) + ' octets. ') + ('A maximum of ' + chalk.bold(MAX_OCTETS) + ' octets are allowed per line.'));
         process.exit(1);
     }
@@ -113,10 +111,15 @@ vcard[vcard.length] = 'VCARD:END' + CRLF;
 
 process.stdout.write(vcard.join(vco.CRLF));
 
-/*console.log(JSON.stringify({
-    prop:  prop,
-    param: param,
-    type:  type,
-    val:   val,
-    _line: line
-}, null, 4));*/
+/**
+ * Normative References
+ * --------------------
+ *
+ * [RFC6350] Perreault, S., "vCard Format Specification", RFC 6350,
+ *           DOI 10.17487/RFC6350, August 2011,
+ *           <http://www.rfc-editor.org/info/rfc6350>.
+ *
+ * [RFC7095] Kewisch, P., "jCard: The JSON Format for vCard", RFC 7095,
+ *           DOI 10.17487/RFC7095, January 2014,
+ *           <http://www.rfc-editor.org/info/rfc7095>.
+ */
