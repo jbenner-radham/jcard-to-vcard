@@ -1,0 +1,22 @@
+{
+    "parameters": [
+        "label",
+        "language",
+        "geo",
+        "tz",
+        "altid",
+        "pid",
+        "pref",
+        "type"
+    ],
+    "value": "structured text value",
+    "components": [
+        "post-office-box",
+        "extended-address",
+        "street-address",
+        "locality",
+        "region",
+        "postal-code",
+        "country-name"
+    ]
+}

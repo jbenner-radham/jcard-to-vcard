@@ -1,0 +1,11 @@
+{
+    "parameters": [
+        "altid",
+        "pid",
+        "pref",
+        "type",
+        "mediatype",
+        "any"
+    ],
+    "value": "text"
+}

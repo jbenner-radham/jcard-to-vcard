@@ -1,0 +1,8 @@
+{
+    "parameters": [
+        "altid",
+        "calscale",
+        "any"
+    ],
+    "value": "date-and-or-time"
+}

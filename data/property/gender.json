@@ -1,0 +1,13 @@
+{
+    "parameters": [
+        "any"
+    ],
+    "value": "text",
+    "sex-components": [
+        "M",
+        "F",
+        "O",
+        "N",
+        "U"
+    ]
+}

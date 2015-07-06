@@ -21,6 +21,21 @@ jcard.forEach(function (item) {
 
     /** `contentline = [group "."] name *(";" param) ":" value CRLF` */
     var line = '' + prop;
+    var valueType = null;
+
+    try {
+        valueType = require(__dirname + '/../data/property/' + prop.toLowerCase() + '.json').value;
+        // -- console.log(chalk.bold.yellow(valueType));
+    } catch (_e) {}
+
+    var property = {
+        name: prop,
+        parameter: param,
+        value: val,
+        'value-type': valueType
+    };
+
+    // !!! // console.log(chalk.green(JSON.stringify(property, null, 4)));
 
     // -- console.info(chalk.green(type));
 
