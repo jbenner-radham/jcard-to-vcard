@@ -8,6 +8,7 @@ var is = require('is_js');
 
 var isValidOctetWidth = require('./lib/is-valid-octet-width.js');
 var isVcardProperty = require('./lib/is-vcard-property.js');
+var vco = require('./lib/vcard.js');
 
 var CRLF = '\r\n';
 var MAX_OCTETS = 75;
@@ -33,14 +34,23 @@ jcard.forEach(function (item) {
         // -- console.log(chalk.bold.yellow(valueType));
     } catch (_e) {}
 
-    var property = {
-        name: prop,
+    /*let property = {
+        name:      prop,
         parameter: param,
-        value: val,
+        value:     val,
         'value-type': valueType
-    };
+    };*/
 
-    // - console.log(chalk.green(JSON.stringify(property, null, 4)));
+    var property = new vco.Property({
+        name: prop,
+        parameters: param,
+        value: val,
+        valueType: valueType
+    });
+
+    console.log(chalk.green(JSON.stringify(property, null, 4)));
+    console.log(property.toString());
+    // console.log(chalk.yellow(new vco.Oh()._keys()));
 
     // -- console.info(chalk.green(type));
 
@@ -101,7 +111,7 @@ jcard.forEach(function (item) {
 
 vcard[vcard.length] = 'VCARD:END' + CRLF;
 
-process.stdout.write(vcard.join(CRLF));
+process.stdout.write(vcard.join(vco.CRLF));
 
 /*console.log(JSON.stringify({
     prop:  prop,
