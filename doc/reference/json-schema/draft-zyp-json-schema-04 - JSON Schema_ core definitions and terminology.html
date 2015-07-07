@@ -1,0 +1,942 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="index,follow" />
+    <meta name="creator" content="rfcmarkup version 1.111" />
+    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+<meta name="DC.Identifier" content="urn:ietf:id:zyp-json-schema" />
+<meta name="DC.Description.Abstract" content="JSON Schema defines the media type &quot;application/schema+json&quot;, a JSON" />
+<meta name="DC.Creator" content="Court, Gary" />
+<meta name="DC.Creator" content="Zyp, Kris" />
+<meta name="DC.Creator" content="Galiegue, Francis" />
+<meta name="DC.Date.Issued" content="2013-01-31" />
+<meta name="DC.Title" content="JSON Schema: core definitions and terminology" />
+
+    <link rel="icon" href="/images/id.png" type="image/png" />
+    <link rel="shortcut icon" href="/images/id.png" type="image/png" />
+    <title>draft-zyp-json-schema-04 - JSON Schema: core definitions and terminology</title>
+    
+    
+    <style type="text/css">
+	body {
+	    margin: 0px 8px;
+            font-size: 1em;
+	}
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style>
+    <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]-->
+
+    <script type="text/javascript"><!--
+    function addHeaderTags() {
+	var spans = document.getElementsByTagName("span");
+	for (var i=0; i < spans.length; i++) {
+	    var elem = spans[i];
+	    if (elem) {
+		var level = elem.getAttribute("class");
+                if (level == "h1" || level == "h2" || level == "h3" || level == "h4" || level == "h5" || level == "h6") {
+                    elem.innerHTML = "<"+level+">"+elem.innerHTML+"</"+level+">";		
+                }
+	    }
+	}
+    }
+    var legend_html = "Colour legend:<br />      <table>         <tr><td>Unknown:</td>                   <td><span class='cplate bgwhite'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>                     <td><span class='cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Informational:</td>             <td><span class='cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Experimental:</td>              <td><span class='cplate bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Best Common Practice:</td>      <td><span class='cplate bgmagenta'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:</td>         <td><span class='cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft Standard (old designation):</td> <td><span class='cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Internet Standard:</td>         <td><span class='cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Historic:</td>                  <td><span class='cplate bggrey'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>                  <td><span class='cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem = document.getElementById(id);
+        elem.innerHTML = eval(id+"_html");
+        elem.style.visibility='visible';
+    }
+    function hideElem(id) {
+        var elem = document.getElementById(id);
+        elem.style.visibility='hidden';        
+        elem.innerHTML = "";
+    }
+    // -->
+    </script>
+</head>
+<body onload="addHeaderTags()">
+   <div style="height: 13px;">
+      <div onmouseover="this.style.cursor='pointer';"
+         onclick="showElem('legend');"
+         onmouseout="hideElem('legend')"
+	 style="height: 6px; position: absolute;"
+         class="pre noprint docinfo bgred"
+         title="Click for colour legend." >                                                                        </div>
+      <div id="legend"
+           class="docinfo noprint pre legend"
+           style="position:absolute; top: 4px; left: 4ex; visibility:hidden; background-color: white; padding: 4px 9px 5px 7px; border: solid #345 1px; "
+           onmouseover="showElem('legend');"
+           onmouseout="hideElem('legend');">
+      </div>
+   </div>
+<span class="pre noprint docinfo top">[<a href="../html/" title="Document search and retrieval page">Docs</a>] [<a href="https://tools.ietf.org/id/draft-zyp-json-schema-04.txt" title="Plaintext version of this document">txt</a>|<a href="/pdf/draft-zyp-json-schema-04.txt" title="PDF version of this document">pdf</a>|<a href="/id/draft-zyp-json-schema-04.xml" title="XML source for this document">xml</a>] [<a href='https://datatracker.ietf.org/doc/draft-zyp-json-schema' title='IESG Datatracker information for this document'>Tracker</a>] [<a href="mailto:draft-zyp-json-schema@tools.ietf.org?subject=draft-zyp-json-schema%20" title="Send email to the document authors">Email</a>] [<a href="/rfcdiff?difftype=--hwdiff&amp;url2=draft-zyp-json-schema-04.txt" title="Inline diff (wdiff)">Diff1</a>] [<a href="/rfcdiff?url2=draft-zyp-json-schema-04.txt" title="Side-by-side diff">Diff2</a>] [<a href="/idnits?url=https://tools.ietf.org/id/draft-zyp-json-schema-04.txt" title="Run an idnits check of this document">Nits</a>]           </span><br />
+<span class="pre noprint docinfo">                                                                        </span><br />
+<span class="pre noprint docinfo">Versions: <a href="./draft-zyp-json-schema-00">00</a> <a href="./draft-zyp-json-schema-01">01</a> <a href="./draft-zyp-json-schema-02">02</a> <a href="./draft-zyp-json-schema-03">03</a> <a href="./draft-zyp-json-schema-04">04</a>                                                </span><br />
+<span class="pre noprint docinfo">                                                                        </span><br />
+<pre>
+Internet Engineering Task Force                         F. Galiegue, Ed.
+Internet-Draft
+Intended status: Informational                               K. Zyp, Ed.
+Expires: August 4, 2013                                    SitePen (USA)
+                                                                G. Court
+                                                        January 31, 2013
+
+
+             <span class="h1">JSON Schema: core definitions and terminology</span>
+                        <span class="h1">draft-zyp-json-schema-04</span>
+
+Abstract
+
+   JSON Schema defines the media type "application/schema+json", a JSON
+   based format for defining the structure of JSON data.  JSON Schema
+   provides a contract for what JSON data is required for a given
+   application and how to interact with it.  JSON Schema is intended to
+   define validation, documentation, hyperlink navigation, and
+   interaction control of JSON data.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of <a href="./bcp78">BCP 78</a> and <a href="./bcp79">BCP 79</a>.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at <a href="http://datatracker.ietf.org/drafts/current/">http://datatracker.ietf.org/drafts/current/</a>.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on August 4, 2013.
+
+Copyright Notice
+
+   Copyright (c) 2013 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to <a href="./bcp78">BCP 78</a> and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (<a href="http://trustee.ietf.org/license-info">http://trustee.ietf.org/license-info</a>) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+
+
+
+<span class="grey">Galiegue, et al.         Expires August 4, 2013                 [Page 1]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-2" id="page-2" href="#page-2" class="invisible"> </a>
+<span class="grey">Internet-Draft                 JSON Schema                  January 2013</span>
+
+
+   include Simplified BSD License text as described in <a href="#section-4">Section 4</a>.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+Table of Contents
+
+   <a href="#section-1">1</a>.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-3">3</a>
+   <a href="#section-2">2</a>.  Conventions and Terminology  . . . . . . . . . . . . . . . . .  <a href="#page-3">3</a>
+   <a href="#section-3">3</a>.  Core terminology . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-3">3</a>
+     <a href="#section-3.1">3.1</a>.  Property, item . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-3">3</a>
+     <a href="#section-3.2">3.2</a>.  JSON Schema, keywords  . . . . . . . . . . . . . . . . . .  <a href="#page-3">3</a>
+     <a href="#section-3.3">3.3</a>.  Empty schema . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-3">3</a>
+     <a href="#section-3.4">3.4</a>.  Root schema, subschema . . . . . . . . . . . . . . . . . .  <a href="#page-4">4</a>
+     <a href="#section-3.5">3.5</a>.  JSON Schema primitive types  . . . . . . . . . . . . . . .  <a href="#page-4">4</a>
+     <a href="#section-3.6">3.6</a>.  JSON value equality  . . . . . . . . . . . . . . . . . . .  <a href="#page-5">5</a>
+     <a href="#section-3.7">3.7</a>.  Instance . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-5">5</a>
+   <a href="#section-4">4</a>.  Overview . . . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-5">5</a>
+     <a href="#section-4.1">4.1</a>.  Validation . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-5">5</a>
+     <a href="#section-4.2">4.2</a>.  Hypermedia and linking . . . . . . . . . . . . . . . . . .  <a href="#page-6">6</a>
+   <a href="#section-5">5</a>.  General considerations . . . . . . . . . . . . . . . . . . . .  <a href="#page-6">6</a>
+     <a href="#section-5.1">5.1</a>.  Applicability to all JSON values . . . . . . . . . . . . .  <a href="#page-6">6</a>
+     <a href="#section-5.2">5.2</a>.  Programming language independence  . . . . . . . . . . . .  <a href="#page-6">6</a>
+     <a href="#section-5.3">5.3</a>.  JSON Schema and HTTP . . . . . . . . . . . . . . . . . . .  <a href="#page-6">6</a>
+     <a href="#section-5.4">5.4</a>.  JSON Schema and other protocols  . . . . . . . . . . . . .  <a href="#page-6">6</a>
+     <a href="#section-5.5">5.5</a>.  Mathematical integers  . . . . . . . . . . . . . . . . . .  <a href="#page-7">7</a>
+     <a href="#section-5.6">5.6</a>.  Extending JSON Schema  . . . . . . . . . . . . . . . . . .  <a href="#page-7">7</a>
+     <a href="#section-5.7">5.7</a>.  Security considerations  . . . . . . . . . . . . . . . . .  <a href="#page-7">7</a>
+   <a href="#section-6">6</a>.  The "$schema" keyword  . . . . . . . . . . . . . . . . . . . .  <a href="#page-7">7</a>
+     <a href="#section-6.1">6.1</a>.  Purpose  . . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-7">7</a>
+     <a href="#section-6.2">6.2</a>.  Customization  . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-8">8</a>
+   <a href="#section-7">7</a>.  URI resolution scopes and dereferencing  . . . . . . . . . . .  <a href="#page-8">8</a>
+     <a href="#section-7.1">7.1</a>.  Definition . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-8">8</a>
+     <a href="#section-7.2">7.2</a>.  URI resolution scope alteration with the "id" keyword  . .  <a href="#page-8">8</a>
+       <a href="#section-7.2.1">7.2.1</a>.  Valid values . . . . . . . . . . . . . . . . . . . . .  <a href="#page-8">8</a>
+       <a href="#section-7.2.2">7.2.2</a>.  Usage  . . . . . . . . . . . . . . . . . . . . . . . .  <a href="#page-9">9</a>
+       <a href="#section-7.2.3">7.2.3</a>.  Canonical dereferencing and inline dereferencing . . . <a href="#page-10">10</a>
+       <a href="#section-7.2.4">7.2.4</a>.  Inline dereferencing and fragments . . . . . . . . . . <a href="#page-11">11</a>
+     <a href="#section-7.3">7.3</a>.  Interoperability considerations  . . . . . . . . . . . . . <a href="#page-11">11</a>
+   8.  Recommended correlation mechanisms for use with the HTTP
+       protocol . . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="#page-11">11</a>
+     <a href="#section-8.1">8.1</a>.  Correlation by means of the "Content-Type" header  . . . . <a href="#page-11">11</a>
+     <a href="#section-8.2">8.2</a>.  Correlation by means of the "Link" header  . . . . . . . . <a href="#page-12">12</a>
+   <a href="#section-9">9</a>.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . <a href="#page-12">12</a>
+   <a href="#section-10">10</a>. References . . . . . . . . . . . . . . . . . . . . . . . . . . <a href="#page-12">12</a>
+     <a href="#section-10.1">10.1</a>. Normative References . . . . . . . . . . . . . . . . . . . <a href="#page-12">12</a>
+     <a href="#section-10.2">10.2</a>. Informative References . . . . . . . . . . . . . . . . . . <a href="#page-12">12</a>
+   <a href="#appendix-A">Appendix A</a>.  ChangeLog . . . . . . . . . . . . . . . . . . . . . . <a href="#page-13">13</a>
+
+
+
+
+<span class="grey">Galiegue, et al.         Expires August 4, 2013                 [Page 2]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-3" id="page-3" href="#page-3" class="invisible"> </a>
+<span class="grey">Internet-Draft                 JSON Schema                  January 2013</span>
+
+
+<span class="h2"><a class="selflink" name="section-1" href="#section-1">1</a>.  Introduction</span>
+
+   JSON Schema is a JSON media type for defining the structure of JSON
+   data.  JSON Schema provides a contract for what JSON data is required
+   for a given application and how to interact with it.  JSON Schema is
+   intended to define validation, documentation, hyperlink navigation,
+   and interaction control of JSON data.
+
+   This specification defines JSON Schema core terminology and
+   mechanisms; related specifications build upon this specification and
+   define different applications of JSON Schema.
+
+<span class="h2"><a class="selflink" name="section-2" href="#section-2">2</a>.  Conventions and Terminology</span>
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in <a href="./rfc2119">RFC 2119</a> [<a href="./rfc2119" title="&quot;Key words for use in RFCs to Indicate Requirement Levels&quot;">RFC2119</a>].
+
+   The terms "JSON", "JSON text", "JSON value", "member", "element",
+   "object", "array", "number", "string", "boolean", "true", "false",
+   and "null" in this document are to be interpreted as defined in <a href="./rfc4627">RFC</a>
+   <a href="./rfc4627">4627</a> [<a href="./rfc4627" title="&quot;The application/json Media Type for JavaScript Object Notation (JSON)&quot;">RFC4627</a>].
+
+<span class="h2"><a class="selflink" name="section-3" href="#section-3">3</a>.  Core terminology</span>
+
+<span class="h3"><a class="selflink" name="section-3.1" href="#section-3.1">3.1</a>.  Property, item</span>
+
+   When refering to a JSON Object, as defined by [<a href="./rfc4627" title="&quot;The application/json Media Type for JavaScript Object Notation (JSON)&quot;">RFC4627</a>], the terms
+   "member" and "property" may be used interchangeably.
+
+   When refering to a JSON Array, as defined by [<a href="./rfc4627" title="&quot;The application/json Media Type for JavaScript Object Notation (JSON)&quot;">RFC4627</a>], the terms
+   "element" and "item" may be used interchangeably.
+
+<span class="h3"><a class="selflink" name="section-3.2" href="#section-3.2">3.2</a>.  JSON Schema, keywords</span>
+
+   A JSON Schema is a JSON document, and that document MUST be an
+   object.  Object members (or properties) defined by JSON Schema (this
+   specification, or related specifications) are called keywords, or
+   schema keywords.
+
+   A JSON Schema MAY contain properties which are not schema keywords.
+
+<span class="h3"><a class="selflink" name="section-3.3" href="#section-3.3">3.3</a>.  Empty schema</span>
+
+   An empty schema is a JSON Schema with no properties, or with
+   properties which are not schema keywords.
+
+
+
+
+
+<span class="grey">Galiegue, et al.         Expires August 4, 2013                 [Page 3]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-4" id="page-4" href="#page-4" class="invisible"> </a>
+<span class="grey">Internet-Draft                 JSON Schema                  January 2013</span>
+
+
+<span class="h3"><a class="selflink" name="section-3.4" href="#section-3.4">3.4</a>.  Root schema, subschema</span>
+
+   This example of a JSON Schema has no subschemas:
+
+
+   {
+       "title": "root"
+   }
+
+
+   JSON Schemas can also be nested, as in this example:
+
+
+   {
+       "title": "root",
+       "otherSchema": {
+           "title": "nested",
+           "anotherSchema": {
+               "title": "alsoNested"
+           }
+       }
+   }
+
+
+   In this example, "nested" and "alsoNested" are subschemas, and "root"
+   is a root schema.
+
+<span class="h3"><a class="selflink" name="section-3.5" href="#section-3.5">3.5</a>.  JSON Schema primitive types</span>
+
+   JSON Schema defines seven primitive types for JSON values:
+
+   array  A JSON array.
+
+   boolean  A JSON boolean.
+
+   integer  A JSON number without a fraction or exponent part.
+
+   number  Any JSON number.  Number includes integer.
+
+   null  The JSON null value.
+
+   object  A JSON object.
+
+   string  A JSON string.
+
+
+
+
+
+
+
+<span class="grey">Galiegue, et al.         Expires August 4, 2013                 [Page 4]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-5" id="page-5" href="#page-5" class="invisible"> </a>
+<span class="grey">Internet-Draft                 JSON Schema                  January 2013</span>
+
+
+<span class="h3"><a class="selflink" name="section-3.6" href="#section-3.6">3.6</a>.  JSON value equality</span>
+
+   Two JSON values are said to be equal if and only if:
+
+      both are nulls; or
+
+      both are booleans, and have the same value; or
+
+      both are strings, and have the same value; or
+
+      both are numbers, and have the same mathematical value; or
+
+      both are arrays, and:
+
+         have the same number of items; and
+
+         items at the same index are equal according to this definition;
+         or
+
+      both are objects, and:
+
+         have the same set of property names; and
+
+         values for a same property name are equal according to this
+         definition.
+
+<span class="h3"><a class="selflink" name="section-3.7" href="#section-3.7">3.7</a>.  Instance</span>
+
+   An instance is any JSON value.  An instance may be described by one
+   or more schemas.
+
+   An instance may also be referred to as "JSON instance", or "JSON
+   data".
+
+<span class="h2"><a class="selflink" name="section-4" href="#section-4">4</a>.  Overview</span>
+
+   This document proposes a new media type "application/schema+json" to
+   identify JSON Schema for describing JSON data.  JSON Schemas are
+   themselves written in JSON.  This, and related specifications, define
+   keywords allowing to describe this data in terms of allowable values,
+   textual descriptions and interpreting relations with other resources.
+   The following sections are a summary of features defined by related
+   specifications.
+
+<span class="h3"><a class="selflink" name="section-4.1" href="#section-4.1">4.1</a>.  Validation</span>
+
+   JSON Schema allows applications to validate instances, either non
+   interactively or interactively.  For instance, an application may
+
+
+
+<span class="grey">Galiegue, et al.         Expires August 4, 2013                 [Page 5]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-6" id="page-6" href="#page-6" class="invisible"> </a>
+<span class="grey">Internet-Draft                 JSON Schema                  January 2013</span>
+
+
+   collect JSON data and check that this data matches a given set of
+   constraints; another application may use a JSON Schema to build an
+   interactive interface in order to collect user input according to
+   constraints described by JSON Schema.
+
+<span class="h3"><a class="selflink" name="section-4.2" href="#section-4.2">4.2</a>.  Hypermedia and linking</span>
+
+   JSON Schema provides a method for extracting link relations from
+   instances to other resources, as well as describing interpretations
+   of instances as multimedia data.  This allows JSON data to be
+   interpreted as rich hypermedia documents, placed in the context of a
+   larger set of related resources.
+
+<span class="h2"><a class="selflink" name="section-5" href="#section-5">5</a>.  General considerations</span>
+
+<span class="h3"><a class="selflink" name="section-5.1" href="#section-5.1">5.1</a>.  Applicability to all JSON values</span>
+
+   It is acknowledged that an instance may be any valid JSON value as
+   defined by [<a href="./rfc4627" title="&quot;The application/json Media Type for JavaScript Object Notation (JSON)&quot;">RFC4627</a>].  As such, JSON Schema does not mandate that an
+   instance be of a particular type: JSON Schema can describe any JSON
+   value, including null.
+
+<span class="h3"><a class="selflink" name="section-5.2" href="#section-5.2">5.2</a>.  Programming language independence</span>
+
+   JSON Schema is programming language agnostic.  The only limitations
+   are the ones expressed by [<a href="./rfc4627" title="&quot;The application/json Media Type for JavaScript Object Notation (JSON)&quot;">RFC4627</a>] and those of the host programming
+   language.
+
+<span class="h3"><a class="selflink" name="section-5.3" href="#section-5.3">5.3</a>.  JSON Schema and HTTP</span>
+
+   This specification acknowledges the role of HTTP [<a href="./rfc2616" title="&quot;Hypertext Transfer Protocol -- HTTP/1.1&quot;">RFC2616</a>] as the
+   dominant protocol in use on the Internet, and the wealth of official
+   specifications related to it.
+
+   This specification uses a subset of these specifications to recommend
+   a set of mechanisms, usable by this protocol, to associate JSON
+   instances to one or more schemas.
+
+<span class="h3"><a class="selflink" name="section-5.4" href="#section-5.4">5.4</a>.  JSON Schema and other protocols</span>
+
+   JSON Schema does not define any semantics for the client-server
+   interface for any other protocols than HTTP.  These semantics are
+   application dependent, or subject to agreement between the parties
+   involved in the use of JSON Schema for their own needs.
+
+
+
+
+
+
+
+<span class="grey">Galiegue, et al.         Expires August 4, 2013                 [Page 6]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-7" id="page-7" href="#page-7" class="invisible"> </a>
+<span class="grey">Internet-Draft                 JSON Schema                  January 2013</span>
+
+
+<span class="h3"><a class="selflink" name="section-5.5" href="#section-5.5">5.5</a>.  Mathematical integers</span>
+
+   It is acknowledged by this specification that some programming
+   languages, and their associated parsers, use different internal
+   representations for floating point numbers and integers, while others
+   do not.
+
+   As a consequence, for interoperability reasons, JSON values used in
+   the context of JSON Schema, whether that JSON be a JSON Schema or an
+   instance, SHOULD ensure that mathematical integers be represented as
+   integers as defined by this specification.
+
+<span class="h3"><a class="selflink" name="section-5.6" href="#section-5.6">5.6</a>.  Extending JSON Schema</span>
+
+   Implementations MAY choose to define additional keywords to JSON
+   Schema.  Save for explicit agreement, schema authors SHALL NOT expect
+   these additional keywords to be supported by peer implementations.
+   Implementations SHOULD ignore keywords they do not support.
+
+<span class="h3"><a class="selflink" name="section-5.7" href="#section-5.7">5.7</a>.  Security considerations</span>
+
+   Both schemas and instances are JSON values.  As such, all security
+   considerations defined in <a href="./rfc4627">RFC 4627</a> [<a href="./rfc4627" title="&quot;The application/json Media Type for JavaScript Object Notation (JSON)&quot;">RFC4627</a>] apply.
+
+<span class="h2"><a class="selflink" name="section-6" href="#section-6">6</a>.  The "$schema" keyword</span>
+
+<span class="h3"><a class="selflink" name="section-6.1" href="#section-6.1">6.1</a>.  Purpose</span>
+
+   The "$schema" keyword is both used as a JSON Schema version
+   identifier and the location of a resource which is itself a JSON
+   Schema, which describes any schema written for this particular
+   version.
+
+   This keyword MUST be located at the root of a JSON Schema.  The value
+   of this keyword MUST be a URI [<a href="./rfc3986" title="&quot;Uniform Resource Identifier (URI): Generic Syntax&quot;">RFC3986</a>] and a valid JSON Reference
+   [<a href="#ref-json-reference" title="&quot;JSON Reference (work in progress)&quot;">json-reference</a>]; this URI MUST be both absolute and normalized.  The
+   resource located at this URI MUST successfully describe itself.  It
+   is RECOMMENDED that schema authors include this keyword in their
+   schemas.
+
+   The following values are predefined:
+
+   <a href="http://json-schema.org/schema#">http://json-schema.org/schema#</a>  JSON Schema written against the
+      current version of the specification.
+
+
+
+
+
+
+
+<span class="grey">Galiegue, et al.         Expires August 4, 2013                 [Page 7]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-8" id="page-8" href="#page-8" class="invisible"> </a>
+<span class="grey">Internet-Draft                 JSON Schema                  January 2013</span>
+
+
+   <a href="http://json-schema.org/hyper-schema#">http://json-schema.org/hyper-schema#</a>  JSON Schema written against the
+      current version of the specification.
+
+   <a href="http://json-schema.org/draft-04/schema#">http://json-schema.org/draft-04/schema#</a>  JSON Schema written against
+      this version.
+
+   <a href="http://json-schema.org/draft-04/hyper-schema#">http://json-schema.org/draft-04/hyper-schema#</a>  JSON Schema
+      hyperschema written against this version.
+
+   <a href="http://json-schema.org/draft-03/schema#">http://json-schema.org/draft-03/schema#</a>  JSON Schema written against
+      JSON Schema, draft v3 [<a href="#ref-json-schema-03" title="&quot;JSON Schema, draft 3&quot;">json-schema-03</a>].
+
+   <a href="http://json-schema.org/draft-03/hyper-schema#">http://json-schema.org/draft-03/hyper-schema#</a>  JSON Schema
+      hyperschema written against JSON Schema, draft v3
+      [<a href="#ref-json-schema-03" title="&quot;JSON Schema, draft 3&quot;">json-schema-03</a>].
+
+<span class="h3"><a class="selflink" name="section-6.2" href="#section-6.2">6.2</a>.  Customization</span>
+
+   When extending JSON Schema with custom keywords, schema authors
+   SHOULD define a custom URI for "$schema".  This custom URI MUST NOT
+   be one of the predefined values.
+
+<span class="h2"><a class="selflink" name="section-7" href="#section-7">7</a>.  URI resolution scopes and dereferencing</span>
+
+<span class="h3"><a class="selflink" name="section-7.1" href="#section-7.1">7.1</a>.  Definition</span>
+
+   JSON Schema uses JSON Reference [<a href="#ref-json-reference" title="&quot;JSON Reference (work in progress)&quot;">json-reference</a>] as a mechanism for
+   schema addressing.  It extends this specification in two ways:
+
+      JSON Schema offers facilities to alter the base URI against which
+      a reference must resolve by the means of the "id" keyword;
+
+      it defines a specific dereferencing mechanism extending JSON
+      Reference to accept arbitrary fragment parts.
+
+   Altering the URI within a schema is called defining a new resolution
+   scope.  The initial resolution scope of a schema is the URI of the
+   schema itself, if any, or the empty URI if the schema was not loaded
+   from a URI.
+
+<span class="h3"><a class="selflink" name="section-7.2" href="#section-7.2">7.2</a>.  URI resolution scope alteration with the "id" keyword</span>
+
+<span class="h4"><a class="selflink" name="section-7.2.1" href="#section-7.2.1">7.2.1</a>.  Valid values</span>
+
+   The value for this keyword MUST be a string, and MUST be a valid URI.
+   This URI MUST be normalized, and SHOULD NOT be an empty fragment (#)
+   or the empty URI.
+
+
+
+
+<span class="grey">Galiegue, et al.         Expires August 4, 2013                 [Page 8]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-9" id="page-9" href="#page-9" class="invisible"> </a>
+<span class="grey">Internet-Draft                 JSON Schema                  January 2013</span>
+
+
+<span class="h4"><a class="selflink" name="section-7.2.2" href="#section-7.2.2">7.2.2</a>.  Usage</span>
+
+   The "id" keyword (or "id", for short) is used to alter the resolution
+   scope.  When an id is encountered, an implementation MUST resolve
+   this id against the most immediate parent scope.  The resolved URI
+   will be the new resolution scope for this subschema and all its
+   children, until another id is encountered.
+
+   When using "id" to alter resolution scopes, schema authors SHOULD
+   ensure that resolution scopes are unique within the schema.
+
+   This schema will be taken as an example:
+
+
+   {
+       "id": "<a href="http://x.y.z/rootschema.json#">http://x.y.z/rootschema.json#</a>",
+       "schema1": {
+           "id": "#foo"
+       },
+       "schema2": {
+           "id": "otherschema.json",
+           "nested": {
+               "id": "#bar"
+           },
+           "alsonested": {
+               "id": "t/inner.json#a"
+           }
+       },
+       "schema3": {
+           "id": "some://where.else/completely#"
+       }
+   }
+
+
+   Subschemas at the following URI-encoded JSON Pointer [<a href="#ref-json-pointer" title="&quot;JSON Pointer (work in progress)&quot;">json-pointer</a>]s
+   (starting from the root schema) define the following resolution
+   scopes:
+
+   # (document root)  <a href="http://x.y.z/rootschema.json#">http://x.y.z/rootschema.json#</a>
+
+   #/schema1  <a href="http://x.y.z/rootschema.json#foo">http://x.y.z/rootschema.json#foo</a>
+
+   #/schema2  <a href="http://x.y.z/otherschema.json#">http://x.y.z/otherschema.json#</a>
+
+   #/schema2/nested  <a href="http://x.y.z/otherschema.json#bar">http://x.y.z/otherschema.json#bar</a>
+
+
+
+
+
+
+<span class="grey">Galiegue, et al.         Expires August 4, 2013                 [Page 9]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-10" id="page-10" href="#page-10" class="invisible"> </a>
+<span class="grey">Internet-Draft                 JSON Schema                  January 2013</span>
+
+
+   #/schema2/alsonested  <a href="http://x.y.z/t/inner.json#a">http://x.y.z/t/inner.json#a</a>
+
+   #/schema3  some://where.else/completely#
+
+<span class="h4"><a class="selflink" name="section-7.2.3" href="#section-7.2.3">7.2.3</a>.  Canonical dereferencing and inline dereferencing</span>
+
+   When resolving a URI against a resolution scope, an implementation
+   may choose two modes of operation:
+
+   canonical dereferencing  The implementation dereferences all resolved
+      URIs.
+
+   inline dereferencing  The implementation chooses to dereference URIs
+      within the schema.
+
+   Implementations MUST support canonical dereferencing, and MAY support
+   inline dereferencing.
+
+   For example, consider this schema:
+
+
+   {
+       "id": "<a href="http://my.site/myschema#">http://my.site/myschema#</a>",
+       "definitions": {
+           "schema1": {
+               "id": "schema1",
+               "type": "integer"
+           },
+           "schema2", {
+               "type": "array",
+               "items": { "$ref": "schema1" }
+           }
+       }
+   }
+
+
+   When an implementation encounters the "schema1" reference, it
+   resolves it against the most immediate parent scope, leading to URI
+   "<a href="http://my.site/schema1#">http://my.site/schema1#</a>".  The way to process this URI will differ
+   according to the chosen dereferencing mode:
+
+      if canonical dereferencing is used, the implementation will
+      dereference this URI, and fetch the content at this URI;
+
+      if inline dereferencing is used, the implementation will notice
+      that URI scope "<a href="http://my.site/schema1#">http://my.site/schema1#</a>" is already defined within
+      the schema, and choose to use the appropriate subschema.
+
+
+
+
+<span class="grey">Galiegue, et al.         Expires August 4, 2013                [Page 10]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-11" id="page-11" href="#page-11" class="invisible"> </a>
+<span class="grey">Internet-Draft                 JSON Schema                  January 2013</span>
+
+
+<span class="h4"><a class="selflink" name="section-7.2.4" href="#section-7.2.4">7.2.4</a>.  Inline dereferencing and fragments</span>
+
+   When using inline dereferencing, a resolution scope may lead to a URI
+   which has a non empty fragment part which is not a JSON Pointer, as
+   in this example:
+
+
+   {
+       "id": "<a href="http://some.site/schema#">http://some.site/schema#</a>",
+       "not": { "$ref": "#inner" },
+       "definitions": {
+           "schema1": {
+               "id": "#inner",
+               "type": "boolean"
+           }
+       }
+   }
+
+
+   An implementation choosing to support inline dereferencing SHOULD be
+   able to use this kind of reference.  Implementations choosing to use
+   canonical dereferencing, however, are not required to support it.
+
+<span class="h3"><a class="selflink" name="section-7.3" href="#section-7.3">7.3</a>.  Interoperability considerations</span>
+
+   Inline dereferencing can produce canonical URIs which differ from the
+   canonical URI of the root schema.  Schema authors SHOULD ensure that
+   implementations using canonical dereferencing obtain the same content
+   as implementations using inline dereferencing.
+
+   Extended JSON References using fragments which are not JSON Pointers
+   are not dereferenceable by implementations choosing not to support
+   inline dereferencing.  This kind of reference is defined for
+   backwards compatibility, and SHOULD NOT be used in new schemas.
+
+<span class="h2"><a class="selflink" name="section-8" href="#section-8">8</a>.  Recommended correlation mechanisms for use with the HTTP protocol</span>
+
+   It is acknowledged by this specification that the majority of
+   interactive JSON Schema processing will be over HTTP.  This section
+   therefore gives recommendations for materializing an instance/schema
+   correlation using mechanisms currently available for this protocol.
+   An instance is said to be described by one (or more) schema(s).
+
+<span class="h3"><a class="selflink" name="section-8.1" href="#section-8.1">8.1</a>.  Correlation by means of the "Content-Type" header</span>
+
+   It is RECOMMENDED that a MIME type parameter by the name of "profile"
+   be appended to the "Content-Type" header of the instance being
+   processed.  If present, the value of this parameter MUST be a valid
+
+
+
+<span class="grey">Galiegue, et al.         Expires August 4, 2013                [Page 11]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-12" id="page-12" href="#page-12" class="invisible"> </a>
+<span class="grey">Internet-Draft                 JSON Schema                  January 2013</span>
+
+
+   URI, and this URI SHOULD resolve to a valid JSON Schema.  The MIME
+   type MUST be "application/json", or any other subtype.
+
+   An example of such a header would be:
+
+
+   Content-Type: application/my-media-type+json;
+             profile=http://example.com/my-hyper-schema#
+
+
+<span class="h3"><a class="selflink" name="section-8.2" href="#section-8.2">8.2</a>.  Correlation by means of the "Link" header</span>
+
+   When using the "Link" header, the relation type used MUST be
+   "describedBy", as defined by <a href="./rfc5988#section-5.3">RFC 5988, section&nbsp;5.3</a> [<a href="./rfc5988" title="&quot;Web Linking&quot;">RFC5988</a>].  The
+   target URI of the "Link" header MUST be a valid JSON Schema.
+
+   An example of such a header would be:
+
+
+   Link: &lt;http://example.com/my-hyper-schema#&gt;; rel="describedBy"
+
+
+<span class="h2"><a class="selflink" name="section-9" href="#section-9">9</a>.  IANA Considerations</span>
+
+   The proposed MIME media type for JSON Schema is defined as follows:
+
+      type name: application;
+
+      subtype name: schema+json.
+
+<span class="h2"><a class="selflink" name="section-10" href="#section-10">10</a>.  References</span>
+
+<span class="h3"><a class="selflink" name="section-10.1" href="#section-10.1">10.1</a>.  Normative References</span>
+
+   [<a name="ref-RFC2119" id="ref-RFC2119">RFC2119</a>]         Bradner, S., "Key words for use in RFCs to Indicate
+                     Requirement Levels", <a href="./bcp14">BCP 14</a>, <a href="./rfc2119">RFC 2119</a>, March 1997.
+
+<span class="h3"><a class="selflink" name="section-10.2" href="#section-10.2">10.2</a>.  Informative References</span>
+
+   [<a name="ref-RFC2616" id="ref-RFC2616">RFC2616</a>]         Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
+                     Masinter, L., Leach, P., and T. Berners-Lee,
+                     "Hypertext Transfer Protocol -- HTTP/1.1",
+                     <a href="./rfc2616">RFC 2616</a>, June 1999.
+
+   [<a name="ref-RFC3986" id="ref-RFC3986">RFC3986</a>]         Berners-Lee, T., Fielding, R., and L. Masinter,
+                     "Uniform Resource Identifier (URI): Generic
+                     Syntax", STD 66, <a href="./rfc3986">RFC 3986</a>, January 2005.
+
+
+
+
+<span class="grey">Galiegue, et al.         Expires August 4, 2013                [Page 12]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-13" id="page-13" href="#page-13" class="invisible"> </a>
+<span class="grey">Internet-Draft                 JSON Schema                  January 2013</span>
+
+
+   [<a name="ref-RFC4627" id="ref-RFC4627">RFC4627</a>]         Crockford, D., "The application/json Media Type for
+                     JavaScript Object Notation (JSON)", <a href="./rfc4627">RFC 4627</a>,
+                     July 2006.
+
+   [<a name="ref-RFC5988" id="ref-RFC5988">RFC5988</a>]         Nottingham, M., "Web Linking", <a href="./rfc5988">RFC 5988</a>,
+                     October 2010.
+
+   [<a name="ref-json-reference" id="ref-json-reference">json-reference</a>]  Bryan, P. and K. Zyp, "JSON Reference (work in
+                     progress)", September 2012, &lt;<a href="http://tools.ietf.org/html/draft-pbryan-zyp-json-ref-03">http://tools.ietf.org/</a>
+                     <a href="http://tools.ietf.org/html/draft-pbryan-zyp-json-ref-03">html/draft-pbryan-zyp-json-ref-03</a>&gt;.
+
+   [<a name="ref-json-pointer" id="ref-json-pointer">json-pointer</a>]    Bryan, P. and K. Zyp, "JSON Pointer (work in
+                     progress)", September 2012, &lt;<a href="http://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-07">http://tools.ietf.org/</a>
+                     <a href="http://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-07">html/draft-ietf-appsawg-json-pointer-07</a>&gt;.
+
+   [<a name="ref-json-schema-03" id="ref-json-schema-03">json-schema-03</a>]  Court, G. and K. Zyp, "JSON Schema, draft 3",
+                     September 2012, &lt;<a href="http://tools.ietf.org/html/draft-zyp-json-schema-03">http://tools.ietf.org/html/</a>
+                     <a href="http://tools.ietf.org/html/draft-zyp-json-schema-03">draft-zyp-json-schema-03</a>&gt;.
+
+<span class="h2"><a class="selflink" name="appendix-A" href="#appendix-A">Appendix A</a>.  ChangeLog</span>
+
+   <a href="./draft-00">draft-00</a>
+
+      *  Initial draft.
+
+      *  Salvaged from draft v3.
+
+      *  Mandate the use of JSON Reference, JSON Pointer.
+
+      *  Define the role of "id".  Define URI resolution scope.
+
+      *  Add interoperability considerations.
+
+Authors' Addresses
+
+   Francis Galiegue (editor)
+
+   EMail: fgaliegue@gmail.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="grey">Galiegue, et al.         Expires August 4, 2013                [Page 13]</span>
+</pre><!--NewPage--><pre class='newpage'><a name="page-14" id="page-14" href="#page-14" class="invisible"> </a>
+<span class="grey">Internet-Draft                 JSON Schema                  January 2013</span>
+
+
+   Kris Zyp (editor)
+   SitePen (USA)
+   530 Lytton Avenue
+   Palo Alto, CA 94301
+   USA
+
+   Phone: +1 650 968 8787
+   EMail: kris@sitepen.com
+
+
+   Gary Court
+   Calgary, AB
+   Canada
+
+   EMail: gary.court@gmail.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galiegue, et al.         Expires August 4, 2013                [Page 14]
+
+</pre><br />
+<span class="noprint"><small><small>Html markup produced by rfcmarkup 1.111, available from
+<a href="https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.org/tools/rfcmarkup/</a>
+</small></small></span>
+</body></html>
