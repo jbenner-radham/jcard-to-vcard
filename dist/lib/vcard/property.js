@@ -6,6 +6,10 @@ var _is_js = require('is_js');
 
 var _is_js2 = _interopRequireDefault(_is_js);
 
+var _escapePropertyValue = require('../escape-property-value');
+
+var _escapePropertyValue2 = _interopRequireDefault(_escapePropertyValue);
+
 var MAX_OCTETS_PER_LINE = 75;
 
 function Property() {
@@ -42,13 +46,19 @@ Property.prototype = {
         var params = [];
         var schema = require(__dirname + '/../../../data/property/' + (this.name.toLowerCase() + '.json'));
 
-        console.log(this.valueType + ' === ' + schema.valueType, this.valueType === schema.valueType);
+        // console.log(`${this.valueType} === ${schema.valueType}`, (this.valueType === schema.valueType));
 
         /*params += (this.valueType === schema.valueType) ? ''
                                                       : `;VALUE=${this.valueType}`;*/
 
-        if (_is_js2['default'].existy(this.parameters.type)) {
-            params.push('TYPE=' + this.parameters.type);
+        //- if (is.existy(this.parameters.type)) {
+        if (_is_js2['default'].not.empty(this.parameters)) {
+            for (var component in this.parameters) {
+                var componentValue = this.parameters[component];
+                var componentString = component.toUpperCase() + '=';
+                componentString += _is_js2['default'].array(componentValue) ? componentValue.map(_escapePropertyValue2['default']).join(',') : (0, _escapePropertyValue2['default'])(componentValue);
+                params.push('' + componentString);
+            }
         }
 
         if (this.valueType !== schema.valueType) {
@@ -56,11 +66,10 @@ Property.prototype = {
         }
 
         //console.log('is.empty(params)', is.empty(params), params);
-        //console.log('is.truthy(params)', is.truthy(params), params);
 
         params = _is_js2['default'].empty(params) ? '' : ';' + params.join(';');
 
-        var value = this.valueType === 'text' && _is_js2['default'].array(this.value) ? this.value.join(';') : this.value;
+        var value = this.valueType === 'text' && _is_js2['default'].array(this.value) ? this.value.map(_escapePropertyValue2['default']).join(';') : (0, _escapePropertyValue2['default'])(this.value);
 
         return '' + this.name.toUpperCase() + params + ':' + value;
     }
