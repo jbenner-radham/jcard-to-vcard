@@ -19,5 +19,6 @@
         "video",
         "voice",
         "work"
-    ]
+    ],
+    "valueType": "text"
 }

@@ -25,23 +25,24 @@ jcard.forEach(item => {
 
     /** `contentline = [group "."] name *(";" param) ":" value CRLF` */
     let line      = `${prop}`;
-    let valueType = null;
+    // let valueType = null;
 
-    try {
-        let definition = `${__dirname}/../data/property/${prop.toLowerCase()}.json`;
-        valueType = require(definition).value;
-    } catch (_e) {}
+    /*try {
+        let schema = require(
+            `${__dirname}/../data/property/${prop.toLowerCase()}.json`
+        );
+    } catch (_e) {}*/
 
     let property = new vco.Property({
         name:       prop,
         parameters: param,
         value:      val,
-        valueType:  valueType
+        valueType:  type
     });
 
     // [!!!]
     console.log(chalk.green(JSON.stringify(property, null, 4)));
-    // console.log(property.toString());
+    console.log(chalk.yellow(property.toString()));
 
     function escapePropertyValue(str) {
         /** PROTIP: The order of this chain is very important! */

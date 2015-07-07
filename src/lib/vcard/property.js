@@ -14,14 +14,21 @@ function Property(p = {}) {
             `${__dirname}/../../../data/property/` +
             `${p.name.toLowerCase()}.json`
         );
-        this.valueType = schema.valueType;
+        // this.valueType = schema.valueType;
         // console.log(is.array(this.valueType));
         // console.log(schema);
     } catch (_e) {}
 
     // TODO: Need to figure out how we name the value-type in the schema
     //       especially for handling multiprofile value-types like with `RELATED`.
-    // this.valueType = p.valueType || this.valueType;
+    //
+    // > The type identifier string of the value, in lowercase.  It is
+    // > important that parsers check this to determine the data type of
+    // > the value and that they do not rely on assumptions.  For example,
+    // > for structured values, the data type will be "array" (!!! <- NEED TO VERIFY !!!).
+    // ---
+    // [RFC7095], Section 3.3 "Properties (RFC 6350, Section 6)"
+    this.valueType = p.valueType.toLowerCase();
 }
 
 Property.prototype = {
@@ -29,7 +36,18 @@ Property.prototype = {
         return (Buffer.byteLength(this.line) <= MAX_OCTETS_PER_LINE);
     },
     toString() {
-        return `${this.name.toUpperCase()}: [...]`;
+        let params;
+        let schema = require(
+            `${__dirname}/../../../data/property/` +
+            `${this.name.toLowerCase()}.json`
+        );
+
+        console.log(`${this.valueType} === ${schema.valueType}`, (this.valueType === schema.valueType));
+
+        params = (this.valueType === schema.valueType) ? ''
+                                                      : `;VALUE=${this.valueType}`;
+
+        return `${this.name.toUpperCase()}${params}:${this.value}`;
     }
 };
 
