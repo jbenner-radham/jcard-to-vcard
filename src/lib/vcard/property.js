@@ -36,18 +36,36 @@ Property.prototype = {
         return (Buffer.byteLength(this.line) <= MAX_OCTETS_PER_LINE);
     },
     toString() {
-        let params;
+        let params = [];
         let schema = require(
             `${__dirname}/../../../data/property/` +
             `${this.name.toLowerCase()}.json`
         );
 
+
         console.log(`${this.valueType} === ${schema.valueType}`, (this.valueType === schema.valueType));
 
-        params = (this.valueType === schema.valueType) ? ''
-                                                      : `;VALUE=${this.valueType}`;
+        /*params += (this.valueType === schema.valueType) ? ''
+                                                      : `;VALUE=${this.valueType}`;*/
 
-        return `${this.name.toUpperCase()}${params}:${this.value}`;
+        if (is.existy(this.parameters.type)) {
+            params.push(`TYPE=${this.parameters.type}`);
+        }
+
+        if (this.valueType !== schema.valueType) {
+            params.push(`VALUE=${this.valueType}`);
+        }
+
+        //console.log('is.empty(params)', is.empty(params), params);
+        //console.log('is.truthy(params)', is.truthy(params), params);
+
+        params = (is.empty(params)) ? '' : `;${params.join(';')}`;
+
+        let value = (this.valueType === 'text' && is.array(this.value))
+            ? this.value.join(';')
+            : this.value;
+
+        return `${this.name.toUpperCase()}${params}:${value}`;
     }
 };
 
