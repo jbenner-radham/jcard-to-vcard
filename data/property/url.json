@@ -1,5 +1,4 @@
 {
-    "value": "uri",
     "parameters": [
         "altid",
         "mediatype",
@@ -10,5 +9,6 @@
     "type": [
         "home",
         "work"
-    ]
+    ],
+    "valueType": "uri",
 }

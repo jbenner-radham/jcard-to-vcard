@@ -9,7 +9,7 @@
         "pref",
         "type"
     ],
-    "value": "structured text value",
+    "_value": "structured text value",
     "components": [
         "post-office-box",
         "extended-address",
@@ -18,5 +18,6 @@
         "region",
         "postal-code",
         "country-name"
-    ]
+    ],
+    "valueType": "text"
 }

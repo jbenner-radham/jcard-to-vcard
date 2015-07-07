@@ -4,12 +4,13 @@
         "language",
         "sort-as"
     ],
-    "value": "structured text value",
+    "_value": "structured text value",
     "components": [
         "family-name",
         "given-name",
         "additional-name",
         "honorific-prefix",
         "honorific-suffix"
-    ]
+    ],
+    "valueType": "text"
 }

@@ -1,10 +1,11 @@
 {
     "parameters": [
-        "altid",
+        "sort-as",
+        "language",
         "pid",
         "pref",
+        "altid",
         "type",
-        "mediatype",
         "any"
     ],
     "valueType": "text"

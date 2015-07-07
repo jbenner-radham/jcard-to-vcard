@@ -2,11 +2,12 @@
     "default": {
         "value": "individual"
     },
-    "value": [
+    "values": [
         "group",
         "individual",
         "location",
         "org",
         "x-*"
-    ]
+    ],
+    "valueType": "text"
 }

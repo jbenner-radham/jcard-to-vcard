@@ -4,5 +4,5 @@
         "calscale",
         "any"
     ],
-    "value": "date-and-or-time"
+    "valueType": "date-and-or-time"
 }

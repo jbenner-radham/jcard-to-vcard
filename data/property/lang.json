@@ -1,11 +1,10 @@
 {
     "parameters": [
-        "altid",
         "pid",
         "pref",
+        "altid",
         "type",
-        "mediatype",
         "any"
     ],
-    "valueType": "text"
+    "valueType": "language-tag"
 }

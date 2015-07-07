@@ -40,8 +40,8 @@ jcard.forEach(item => {
     });
 
     // [!!!]
-    /*console.log(chalk.green(JSON.stringify(property, null, 4)));
-    console.log(property.toString());*/
+    console.log(chalk.green(JSON.stringify(property, null, 4)));
+    // console.log(property.toString());
 
     function escapePropertyValue(str) {
         /** PROTIP: The order of this chain is very important! */
@@ -107,7 +107,7 @@ jcard.forEach(item => {
             `is ${chalk.bold.red(Buffer.byteLength(line))} octets. ` +
             `A maximum of ${chalk.bold(MAX_OCTETS)} octets are allowed per line.`
         );
-        process.exit(1);
+        //-// process.exit(1);
     }
 
     vcard.push(line);

@@ -2,8 +2,8 @@
     "parameters": [
         "any"
     ],
-    "value": "text",
-    "sex-components": [
+    "valueType": "text",
+    "values": [
         "M",
         "F",
         "O",

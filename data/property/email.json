@@ -1,5 +1,5 @@
 {
-    "value": "text",
+    "valueType": "text",
     "parameters": [
         "altid",
         "pid",
