@@ -2,28 +2,41 @@
 
 var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _chalk = require('chalk');
+
+var _chalk2 = _interopRequireDefault(_chalk);
+
+var _fs = require('fs');
+
+var _fs2 = _interopRequireDefault(_fs);
+
+var _is_js = require('is_js');
+
+var _is_js2 = _interopRequireDefault(_is_js);
+
+var _libIsValidOctetSizeJs = require('./lib/is-valid-octet-size.js');
+
+var _libIsValidOctetSizeJs2 = _interopRequireDefault(_libIsValidOctetSizeJs);
+
+var _libIsVcardPropertyJs = require('./lib/is-vcard-property.js');
+
+var _libIsVcardPropertyJs2 = _interopRequireDefault(_libIsVcardPropertyJs);
+
+var _libVcardJs = require('./lib/vcard.js');
+
+var _libVcardJs2 = _interopRequireDefault(_libVcardJs);
+
 require('babel/polyfill');
 
-var chalk = require('chalk');
-var fs = require('fs');
-var is = require('is_js');
-
-var isValidOctetSize = require('./lib/is-valid-octet-size.js');
-var isVcardProperty = require('./lib/is-vcard-property.js');
-var vco = require('./lib/vcard.js');
-
-var CRLF = '\r\n';
 var MAX_OCTETS = 75;
 
-var source = fs.readFileSync(process.argv[2]).toString();
+var source = _fs2['default'].readFileSync(process.argv[2]).toString();
 var jcard = JSON.parse(source).pop();
 var vcard = ['BEGIN:VCARD'];
 
 jcard.forEach(function (item) {
-    var components = [];
-
-    // Using array destructuring now...
-
     var _item = _slicedToArray(item, 4);
 
     var prop = _item[0];
@@ -31,89 +44,29 @@ jcard.forEach(function (item) {
     var type = _item[2];
     var val = _item[3];
 
-    /** `contentline = [group "."] name *(";" param) ":" value CRLF` */
-    var line = '' + prop;
-    // let valueType = null;
-
-    /*try {
-        let schema = require(
-            `${__dirname}/../data/property/${prop.toLowerCase()}.json`
-        );
-    } catch (_e) {}*/
-
-    var property = new vco.Property({
+    /**
+     * Change the `Property` contructor to use array destructing since the jCard
+     * properties will always be in the same order and structure?
+     */
+    var property = new _libVcardJs2['default'].Property({
         name: prop,
         parameters: param,
         value: val,
         valueType: type
     });
 
-    // [!!!]
-    // console.log(chalk.green(JSON.stringify(property, null, 4)));
-    // console.log(chalk.yellow(property.toString()));
+    var line = property.toString();
 
-    function escapePropertyValue(str) {
-        /** PROTIP: The order of this chain is very important! */
-        return str.replace('\\', '\\\\').replace(',', '\\,').replace(';', '\\;').replace(/\n/g, '\\n');
-    }
-
-    if (is.not.empty(param)) {
-        for (var component in param) {
-            var buf = component.toUpperCase() + '=';
-            buf += is.array(param[component]) ? param[component].map(escapePropertyValue).join(',') : escapePropertyValue(param[component]);
-            components.push(buf);
-        }
-    }
-
-    // - // if (['date', 'time', 'date-time', 'date-and-or-time', 'timestamp'].includes(type)) {
-    /**
-     * jCard supports ISO 8601 "extended format" however vCard does not
-     * so collapse any date/time types.
-     *
-     * @see [RFC6350], Section 4.3
-     */
-    // - //     val = val.replace(/-/g, '');
-    // - // }
-
-    /**
-     * > If the property's value type is the default type for that property, no
-     * > "VALUE" parameter is included.
-     * [is this an actual quote ???????]
-     */
-    if (prop === 'TEL') {
-        if (type == 'uri') {
-            components.push('VALUE=' + type);
-        }
-    } else if (type !== 'text' && !(prop === 'BDAY' && type === 'date-and-or-time') && !(prop === 'LANG' && type === 'language-tag') && !(prop === 'REV' && type === 'timestamp')) {
-        line += ';TYPE=' + type;
-    }
-
-    if (is.not.empty(components)) {
-        line += ';' + components.join(';');
-    }
-
-    // Join "Structured Property Values" on applicable properties
-    // <https://html.spec.whatwg.org/multipage/microdata.html#escaping-the-vcard-text-string>
-    // ---
-    // @see [RFC6350], Section 3.4 "Property Value Escaping"
-    line += ':';
-    line += ['ADR', 'GENDER', 'N', 'ORG'].includes(prop) && is.array(val) /* alternately: `Array.isArray(val)` */
-    ? val.join(';') : val;
-
-    if (!isValidOctetSize(property.toString())) {
-        // if (!isValidOctetSize(line)) {
-        console.error(chalk.red.bold('[ERROR]') + ' ' + ('The line "' + chalk.red(property.toString()) + '" ') + ('is ' + chalk.bold.red(Buffer.byteLength(property.toString())) + ' octets. ') + ('A maximum of ' + chalk.bold(MAX_OCTETS) + ' octets are allowed per line.'));
+    if (!(0, _libIsValidOctetSizeJs2['default'])(line)) {
+        console.error(_chalk2['default'].red.bold('[ERROR]') + ' ' + ('The line "' + _chalk2['default'].red(line) + '" ') + ('is ' + _chalk2['default'].bold.red(Buffer.byteLength(line)) + ' octets. ') + ('A maximum of ' + _chalk2['default'].bold(MAX_OCTETS) + ' octets are allowed per line.'));
         // -// process.exit(1);
     }
 
-    // !!! // vcard.push(line);
-    vcard.push(property.toString());
+    vcard.push(line);
 });
 
-// - // vcard[vcard.length] = `VCARD:END${CRLF}`;
-vcard.push('VCARD:END' + CRLF);
-
-process.stdout.write(vcard.join(vco.CRLF));
+vcard.push('VCARD:END' + _libVcardJs2['default'].CRLF);
+process.stdout.write(vcard.join(_libVcardJs2['default'].CRLF));
 
 /**
  * Normative References

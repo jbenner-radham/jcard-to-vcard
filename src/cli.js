@@ -2,37 +2,26 @@
 
 require('babel/polyfill');
 
-var chalk = require('chalk');
-var fs    = require('fs');
-var is    = require('is_js');
+import chalk from 'chalk';
+import fs from 'fs';
+import is from 'is_js';
+import isValidOctetSize from './lib/is-valid-octet-size.js';
+import isVcardProperty from './lib/is-vcard-property.js';
+import vco from './lib/vcard.js';
 
-var isValidOctetSize = require('./lib/is-valid-octet-size.js');
-var isVcardProperty   = require('./lib/is-vcard-property.js');
-var vco = require('./lib/vcard.js');
-
-const CRLF       = '\r\n';
 const MAX_OCTETS = 75;
 
-var source = fs.readFileSync(process.argv[2]).toString();
-var jcard  = JSON.parse(source).pop();
-var vcard  = [ 'BEGIN:VCARD' ];
+let source = fs.readFileSync(process.argv[2]).toString();
+let jcard  = JSON.parse(source).pop();
+let vcard  = [ 'BEGIN:VCARD' ];
 
 jcard.forEach(item => {
-    let components = [];
-
-    // Using array destructuring now...
     let [prop, param, type, val] = item;
 
-    /** `contentline = [group "."] name *(";" param) ":" value CRLF` */
-    let line      = `${prop}`;
-    // let valueType = null;
-
-    /*try {
-        let schema = require(
-            `${__dirname}/../data/property/${prop.toLowerCase()}.json`
-        );
-    } catch (_e) {}*/
-
+    /**
+     * Change the `Property` contructor to use array destructing since the jCard
+     * properties will always be in the same order and structure?
+     */
     let property = new vco.Property({
         name:       prop,
         parameters: param,
@@ -40,84 +29,22 @@ jcard.forEach(item => {
         valueType:  type
     });
 
-    // [!!!]
-    // console.log(chalk.green(JSON.stringify(property, null, 4)));
-    // console.log(chalk.yellow(property.toString()));
+    let line = property.toString();
 
-    function escapePropertyValue(str) {
-        /** PROTIP: The order of this chain is very important! */
-        return str.replace('\\', '\\\\')
-            .replace(',', '\\,')
-            .replace(';', '\\;')
-            .replace(/\n/g, '\\n');
-    }
-
-    if (is.not.empty(param)) {
-        for (let component in param) {
-            let buf = `${component.toUpperCase()}=`;
-            buf += is.array(param[component]) ? param[component].map(escapePropertyValue).join(',')
-                                              : escapePropertyValue(param[component]);
-            components.push(buf);
-        }
-    }
-
-    // - // if (['date', 'time', 'date-time', 'date-and-or-time', 'timestamp'].includes(type)) {
-        /**
-         * jCard supports ISO 8601 "extended format" however vCard does not
-         * so collapse any date/time types.
-         *
-         * @see [RFC6350], Section 4.3
-         */
-    // - //     val = val.replace(/-/g, '');
-    // - // }
-
-    /**
-     * > If the property's value type is the default type for that property, no
-     * > "VALUE" parameter is included.
-     * [is this an actual quote ???????]
-     */
-    if (prop === 'TEL') {
-        if (type == 'uri') {
-            components.push(`VALUE=${type}`);
-        }
-    } else if (type !== 'text' &&
-        !(prop === 'BDAY' && type === 'date-and-or-time') &&
-        !(prop === 'LANG' && type === 'language-tag') &&
-        !(prop === 'REV'  && type === 'timestamp')
-    ) {
-        line += `;TYPE=${type}`;
-    }
-
-    if (is.not.empty(components)) {
-        line += `;${components.join(';')}`;
-    }
-
-    // Join "Structured Property Values" on applicable properties
-    // <https://html.spec.whatwg.org/multipage/microdata.html#escaping-the-vcard-text-string>
-    // ---
-    // @see [RFC6350], Section 3.4 "Property Value Escaping"
-    line += ':';
-    line += ['ADR', 'GENDER', 'N', 'ORG'].includes(prop) && is.array(val) /* alternately: `Array.isArray(val)` */
-        ? val.join(';')
-        : val;
-
-    if (!isValidOctetSize(property.toString())) { // if (!isValidOctetSize(line)) {
+    if (!isValidOctetSize(line)) {
         console.error(
             `${chalk.red.bold('[ERROR]')} ` +
-            `The line "${chalk.red(property.toString())}" ` +
-            `is ${chalk.bold.red(Buffer.byteLength(property.toString()))} octets. ` +
+            `The line "${chalk.red(line)}" ` +
+            `is ${chalk.bold.red(Buffer.byteLength(line))} octets. ` +
             `A maximum of ${chalk.bold(MAX_OCTETS)} octets are allowed per line.`
         );
         // -// process.exit(1);
     }
 
-    // !!! // vcard.push(line);
-    vcard.push(property.toString());
+    vcard.push(line);
 });
 
-// - // vcard[vcard.length] = `VCARD:END${CRLF}`;
-vcard.push(`VCARD:END${CRLF}`);
-
+vcard.push(`VCARD:END${vco.CRLF}`);
 process.stdout.write(vcard.join(vco.CRLF));
 
 /**
