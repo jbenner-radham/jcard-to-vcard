@@ -10,6 +10,10 @@ var _escapePropertyValue = require('../escape-property-value');
 
 var _escapePropertyValue2 = _interopRequireDefault(_escapePropertyValue);
 
+var _stringifyParameters = require('../stringify-parameters');
+
+var _stringifyParameters2 = _interopRequireDefault(_stringifyParameters);
+
 var MAX_OCTETS_PER_LINE = 75;
 
 function Property() {
@@ -53,12 +57,7 @@ Property.prototype = {
 
         //- if (is.existy(this.parameters.type)) {
         if (_is_js2['default'].not.empty(this.parameters)) {
-            for (var component in this.parameters) {
-                var componentValue = this.parameters[component];
-                var componentString = component.toUpperCase() + '=';
-                componentString += _is_js2['default'].array(componentValue) ? componentValue.map(_escapePropertyValue2['default']).join(',') : (0, _escapePropertyValue2['default'])(componentValue);
-                params.push('' + componentString);
-            }
+            params.push((0, _stringifyParameters2['default'])(this.parameters));
         }
 
         if (this.valueType !== schema.valueType) {

@@ -2,6 +2,7 @@
 
 import is from 'is_js';
 import escapePropertyValue from '../escape-property-value';
+import stringifyParameters from '../stringify-parameters';
 
 const MAX_OCTETS_PER_LINE = 75;
 
@@ -51,14 +52,7 @@ Property.prototype = {
 
         //- if (is.existy(this.parameters.type)) {
         if (is.not.empty(this.parameters)) {
-            for (let component in this.parameters) {
-                let componentValue = this.parameters[component];
-                let componentString = `${component.toUpperCase()}=`;
-                componentString += (is.array(componentValue))
-                    ? componentValue.map(escapePropertyValue).join(',')
-                    : escapePropertyValue(componentValue);
-                params.push(`${componentString}`);
-            }
+            params.push(stringifyParameters(this.parameters));
         }
 
         if (this.valueType !== schema.valueType) {
