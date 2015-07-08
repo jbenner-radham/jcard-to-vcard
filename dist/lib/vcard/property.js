@@ -2,13 +2,25 @@
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _chalk = require('chalk');
+
+var _chalk2 = _interopRequireDefault(_chalk);
+
 var _is_js = require('is_js');
 
 var _is_js2 = _interopRequireDefault(_is_js);
 
+var _collapseDateTimeJs = require('../collapse-date-time.js');
+
+var _collapseDateTimeJs2 = _interopRequireDefault(_collapseDateTimeJs);
+
 var _escapePropertyValue = require('../escape-property-value');
 
 var _escapePropertyValue2 = _interopRequireDefault(_escapePropertyValue);
+
+var _isDateTimeTypeJs = require('../is-date-time-type.js');
+
+var _isDateTimeTypeJs2 = _interopRequireDefault(_isDateTimeTypeJs);
 
 var _stringifyParameters = require('../stringify-parameters');
 
@@ -24,10 +36,7 @@ function Property() {
     this.value = p.value || null;
 
     try {
-        var schema = require(__dirname + '/../../../data/property/' + (p.name.toLowerCase() + '.json'));
-        // this.valueType = schema.valueType;
-        // console.log(is.array(this.valueType));
-        // console.log(schema);
+        var schema = require(__dirname + '/../../../data/property/' + p.name.toLowerCase() + '.json');
     } catch (_e) {}
 
     // TODO: Need to figure out how we name the value-type in the schema
@@ -48,14 +57,8 @@ Property.prototype = {
     },
     toString: function toString() {
         var params = [];
-        var schema = require(__dirname + '/../../../data/property/' + (this.name.toLowerCase() + '.json'));
+        var schema = require(__dirname + '/../../../data/property/' + this.name.toLowerCase() + '.json');
 
-        // console.log(`${this.valueType} === ${schema.valueType}`, (this.valueType === schema.valueType));
-
-        /*params += (this.valueType === schema.valueType) ? ''
-                                                      : `;VALUE=${this.valueType}`;*/
-
-        //- if (is.existy(this.parameters.type)) {
         if (_is_js2['default'].not.empty(this.parameters)) {
             params.push((0, _stringifyParameters2['default'])(this.parameters));
         }
@@ -64,11 +67,13 @@ Property.prototype = {
             params.push('VALUE=' + this.valueType);
         }
 
-        //console.log('is.empty(params)', is.empty(params), params);
-
         params = _is_js2['default'].empty(params) ? '' : ';' + params.join(';');
 
         var value = this.valueType === 'text' && _is_js2['default'].array(this.value) ? this.value.map(_escapePropertyValue2['default']).join(';') : (0, _escapePropertyValue2['default'])(this.value);
+
+        if ((0, _isDateTimeTypeJs2['default'])(this.valueType)) {
+            value = (0, _collapseDateTimeJs2['default'])(value);
+        }
 
         return '' + this.name.toUpperCase() + params + ':' + value;
     }

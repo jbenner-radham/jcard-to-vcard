@@ -6,6 +6,10 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _chalk = require('chalk');
+
+var _chalk2 = _interopRequireDefault(_chalk);
+
 var _is_js = require('is_js');
 
 var _is_js2 = _interopRequireDefault(_is_js);
@@ -15,6 +19,8 @@ var _escapePropertyValue = require('./escape-property-value');
 var _escapePropertyValue2 = _interopRequireDefault(_escapePropertyValue);
 
 exports['default'] = function (parameters) {
+    // - // console.info(chalk.blue(JSON.stringify(parameters)));
+
     var params = [];
 
     for (var parameter in parameters) {

@@ -41,8 +41,8 @@ jcard.forEach(item => {
     });
 
     // [!!!]
-    console.log(chalk.green(JSON.stringify(property, null, 4)));
-    console.log(chalk.yellow(property.toString()));
+    // console.log(chalk.green(JSON.stringify(property, null, 4)));
+    // console.log(chalk.yellow(property.toString()));
 
     function escapePropertyValue(str) {
         /** PROTIP: The order of this chain is very important! */
@@ -61,15 +61,15 @@ jcard.forEach(item => {
         }
     }
 
-    if (['date', 'time', 'date-time', 'date-and-or-time', 'timestamp'].includes(type)) {
+    // - // if (['date', 'time', 'date-time', 'date-and-or-time', 'timestamp'].includes(type)) {
         /**
          * jCard supports ISO 8601 "extended format" however vCard does not
          * so collapse any date/time types.
          *
          * @see [RFC6350], Section 4.3
          */
-        val = val.replace(/-/g, '');
-    }
+    // - //     val = val.replace(/-/g, '');
+    // - // }
 
     /**
      * > If the property's value type is the default type for that property, no
@@ -101,20 +101,22 @@ jcard.forEach(item => {
         ? val.join(';')
         : val;
 
-    if (!isValidOctetSize(line)) {
+    if (!isValidOctetSize(property.toString())) { // if (!isValidOctetSize(line)) {
         console.error(
             `${chalk.red.bold('[ERROR]')} ` +
-            `The line "${chalk.red(line)}" ` +
-            `is ${chalk.bold.red(Buffer.byteLength(line))} octets. ` +
+            `The line "${chalk.red(property.toString())}" ` +
+            `is ${chalk.bold.red(Buffer.byteLength(property.toString()))} octets. ` +
             `A maximum of ${chalk.bold(MAX_OCTETS)} octets are allowed per line.`
         );
-        //-// process.exit(1);
+        // -// process.exit(1);
     }
 
-    vcard.push(line);
+    // !!! // vcard.push(line);
+    vcard.push(property.toString());
 });
 
-vcard[vcard.length] = `VCARD:END${CRLF}`;
+// - // vcard[vcard.length] = `VCARD:END${CRLF}`;
+vcard.push(`VCARD:END${CRLF}`);
 
 process.stdout.write(vcard.join(vco.CRLF));
 

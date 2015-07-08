@@ -1,7 +1,10 @@
 'use strict';
 
+import chalk from 'chalk';
 import is from 'is_js';
+import collapseDateTime from '../collapse-date-time.js';
 import escapePropertyValue from '../escape-property-value';
+import isDateTimeType from '../is-date-time-type.js';
 import stringifyParameters from '../stringify-parameters';
 
 const MAX_OCTETS_PER_LINE = 75;
@@ -13,12 +16,8 @@ function Property(p = {}) {
 
     try {
         let schema = require(
-            `${__dirname}/../../../data/property/` +
-            `${p.name.toLowerCase()}.json`
+            `${__dirname}/../../../data/property/${p.name.toLowerCase()}.json`
         );
-        // this.valueType = schema.valueType;
-        // console.log(is.array(this.valueType));
-        // console.log(schema);
     } catch (_e) {}
 
     // TODO: Need to figure out how we name the value-type in the schema
@@ -40,17 +39,9 @@ Property.prototype = {
     toString() {
         let params = [];
         let schema = require(
-            `${__dirname}/../../../data/property/` +
-            `${this.name.toLowerCase()}.json`
+            `${__dirname}/../../../data/property/${this.name.toLowerCase()}.json`
         );
 
-
-        // console.log(`${this.valueType} === ${schema.valueType}`, (this.valueType === schema.valueType));
-
-        /*params += (this.valueType === schema.valueType) ? ''
-                                                      : `;VALUE=${this.valueType}`;*/
-
-        //- if (is.existy(this.parameters.type)) {
         if (is.not.empty(this.parameters)) {
             params.push(stringifyParameters(this.parameters));
         }
@@ -59,13 +50,15 @@ Property.prototype = {
             params.push(`VALUE=${this.valueType}`);
         }
 
-        //console.log('is.empty(params)', is.empty(params), params);
-
         params = (is.empty(params)) ? '' : `;${params.join(';')}`;
 
         let value = (this.valueType === 'text' && is.array(this.value))
             ? this.value.map(escapePropertyValue).join(';')
             : escapePropertyValue(this.value);
+
+        if (isDateTimeType(this.valueType)) {
+            value = collapseDateTime(value)
+        }
 
         return `${this.name.toUpperCase()}${params}:${value}`;
     }
