@@ -3,6 +3,7 @@
 require('babel/polyfill');
 
 import chalk from 'chalk';
+import foldLine from './lib/fold-line.js';
 import fs from 'fs';
 import is from 'is_js';
 import isValidOctetSize from './lib/is-valid-octet-size.js';
@@ -32,13 +33,7 @@ jcard.forEach(item => {
     let line = property.toString();
 
     if (!isValidOctetSize(line)) {
-        console.error(
-            `${chalk.red.bold('[ERROR]')} ` +
-            `The line "${chalk.red(line)}" ` +
-            `is ${chalk.bold.red(Buffer.byteLength(line))} octets. ` +
-            `A maximum of ${chalk.bold(MAX_OCTETS)} octets are allowed per line.`
-        );
-        // -// process.exit(1);
+        line = foldLine(line);
     }
 
     vcard.push(line);

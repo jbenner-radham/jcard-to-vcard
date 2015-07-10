@@ -8,6 +8,10 @@ var _chalk = require('chalk');
 
 var _chalk2 = _interopRequireDefault(_chalk);
 
+var _libFoldLineJs = require('./lib/fold-line.js');
+
+var _libFoldLineJs2 = _interopRequireDefault(_libFoldLineJs);
+
 var _fs = require('fs');
 
 var _fs2 = _interopRequireDefault(_fs);
@@ -58,8 +62,7 @@ jcard.forEach(function (item) {
     var line = property.toString();
 
     if (!(0, _libIsValidOctetSizeJs2['default'])(line)) {
-        console.error(_chalk2['default'].red.bold('[ERROR]') + ' ' + ('The line "' + _chalk2['default'].red(line) + '" ') + ('is ' + _chalk2['default'].bold.red(Buffer.byteLength(line)) + ' octets. ') + ('A maximum of ' + _chalk2['default'].bold(MAX_OCTETS) + ' octets are allowed per line.'));
-        // -// process.exit(1);
+        line = (0, _libFoldLineJs2['default'])(line);
     }
 
     vcard.push(line);

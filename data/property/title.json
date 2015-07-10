@@ -1,0 +1,11 @@
+{
+    "parameters": [
+        "language",
+        "pid",
+        "pref",
+        "altid",
+        "type",
+        "any"
+    ],
+    "valueType": "text"
+}

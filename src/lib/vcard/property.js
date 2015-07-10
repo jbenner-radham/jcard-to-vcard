@@ -57,7 +57,7 @@ Property.prototype = {
             : escapePropertyValue(this.value);
 
         if (isDateTimeType(this.valueType)) {
-            value = collapseDateTime(value)
+            value = collapseDateTime(value);
         }
 
         return `${this.name.toUpperCase()}${params}:${value}`;
