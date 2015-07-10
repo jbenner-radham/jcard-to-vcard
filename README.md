@@ -78,4 +78,4 @@ $ node dist/cli.js my-jcard.json > my-new-vcard.vcf
 
 ## License
 
-This project is licensed under the terms of the [MIT License](https://www.tldrlegal.com/l/mit). You can view the full license [here](README.md)
+This project is licensed under the terms of the [MIT License](https://www.tldrlegal.com/l/mit). You can view the full license [here](README.md).
