@@ -1,4 +1,4 @@
-# jcard-to-vcard
+# jcard-to-vcard [![unstable](http://badges.github.io/stability-badges/dist/unstable.svg)](http://github.com/badges/stability-badges)
 
 > A jCard to vCard converter. Currently CLI only but will have a programmatic
 module interface in the future.
