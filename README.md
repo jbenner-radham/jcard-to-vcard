@@ -51,7 +51,7 @@ $ node dist/cli.js my-jcard.json > my-new-vcard.vcf
   - [x] `TITLE`
   - [x] `TZ`
   - [ ] `UID`
-  - [ ] `URL`
+  - [x] `URL`
   - [ ] `VERSION`
   - [ ] `XML`
 - [ ] Parameter Parsing
