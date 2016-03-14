@@ -1,19 +1,19 @@
-# jcard-to-vcard [![unstable](http://badges.github.io/stability-badges/dist/unstable.svg)](http://github.com/badges/stability-badges)
+# jcard-to-vcard
 
 > A jCard to vCard converter. Currently CLI only but will have a programmatic
 module interface in the future.
 
 ## Heads Up!
 
-This is still very much a WIP project and is __*not*__ production ready.
+This is still very much a WIP project and is __*not*__ feature complete.
 
 ## Usage
 
 ```sh
-$ node dist/cli.js my-jcard.json > my-new-vcard.vcf
+$ node dist/cli.js jcard.json > vcard.vcf
 ```
 
-## To-do
+## To-Do
 
 - [ ] Property Parsing
   - [x] `ADR`
