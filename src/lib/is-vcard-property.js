@@ -5,7 +5,7 @@ var path = require('path');
 
 module.exports = (prop) => {
     function getJsonBasename(file) {
-        return path.basename(file, '.json')
+        return path.basename(file, '.json');
     }
 
     function isJsonFile(resource) {
