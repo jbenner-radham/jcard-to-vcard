@@ -2,9 +2,9 @@
   "name": "jcard-to-vcard",
   "version": "0.0.0",
   "description": "jCard magic thingy.",
-  "main": "dist/cli.js",
+  "main": "cli.js",
   "scripts": {
-    "test": "mocha --compilers js:babel/register"
+    "test": "mocha"
   },
   "keywords": [
     "jCard",
@@ -14,18 +14,17 @@
   "author": "James Benner <james.benner@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "babel": "^5.2.15",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^5.1.0",
-    "gulp-micro": "^1.0.2",
-    "gulp-util": "^3.0.4",
-    "mocha": "^2.2.4"
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-micro": "^1.1.0",
+    "mocha": "^2.4.5"
   },
   "dependencies": {
     "@radioactivehamster/date-time": "^0.1.2",
-    "chalk": "^1.1.0",
-    "is_js": "^0.7.4",
-    "lodash": "^3.10.0",
-    "sprintf-js": "^1.0.2"
+    "chalk": "^1.1.1",
+    "collapse-date-time": "^0.1.2",
+    "is_js": "^0.8.0",
+    "lodash": "^4.6.1",
+    "sprintf-js": "^1.0.3"
   }
 }
