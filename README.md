@@ -1,6 +1,10 @@
-# jcard-to-vcard
+jcard-to-vcard
+==============
+[![npm Version][NPM VERSION BADGE]][NPM PAGE]
+[![GitHub License][LICENSE BADGE]][LICENSE PAGE]
+[![Build Status][BUILD BADGE]][BUILD PAGE]
 
-> A jCard to vCard converter. Currently CLI only but will have a programmatic
+A jCard to vCard converter. Currently CLI only but will have a programmatic
 module interface in the future.
 
 ## Heads Up!
@@ -79,3 +83,10 @@ $ node dist/cli.js jcard.json > vcard.vcf
 ## License
 
 This project is licensed under the terms of the [MIT License](https://www.tldrlegal.com/l/mit). You can view the full license [here](README.md).
+
+[BUILD BADGE]: https://img.shields.io/travis/jbenner-radham/jcard-to-vcard.svg?style=flat-square
+[BUILD PAGE]: https://travis-ci.org/jbenner-radham/jcard-to-vcard
+[LICENSE BADGE]: https://img.shields.io/badge/license-MIT%20License-blue.svg?style=flat-square
+[LICENSE PAGE]: https://github.com/jbenner-radham/jcard-to-vcard/blob/master/LICENSE
+[NPM PAGE]: https://www.npmjs.com/package/jcard-to-vcard
+[NPM VERSION BADGE]: https://img.shields.io/npm/v/jcard-to-vcard.svg?style=flat-square
