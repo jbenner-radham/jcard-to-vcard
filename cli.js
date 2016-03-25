@@ -15,7 +15,11 @@ let jcard  = JSON.parse(source).pop();
 let vcard  = [ 'BEGIN:VCARD' ];
 
 jcard.forEach(item => {
-    let [prop, param, type, val] = item;
+    // let [prop, param, type, val] = item;
+    let prop  = item[0];
+    let param = item[1];
+    let type  = item[2];
+    let val   = item[3];
 
     /**
      * Change the `Property` contructor to use array destructing since the jCard
