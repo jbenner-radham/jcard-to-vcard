@@ -1,14 +1,12 @@
 'use strict';
 
-require('babel/polyfill');
-
-import chalk from 'chalk';
-import foldLine from './lib/fold-line.js';
-import fs from 'fs';
-import is from 'is_js';
-import isValidOctetSize from './lib/is-valid-octet-size.js';
-import isVcardProperty from './lib/is-vcard-property.js';
-import vco from './lib/vcard.js';
+let chalk            = require('chalk');
+let foldLine         = require('./lib/fold-line');
+let fs               = require('fs');
+let is               = require('is_js');
+let isValidOctetSize = require('./lib/is-valid-octet-size');
+let isVcardProperty  = require('./lib/is-vcard-property');
+let vco              = require('./lib/vcard');
 
 const MAX_OCTETS = 75;
 
