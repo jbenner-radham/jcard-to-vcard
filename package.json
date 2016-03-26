@@ -2,9 +2,15 @@
   "name": "jcard-to-vcard",
   "version": "0.0.0",
   "description": "jCard magic thingy.",
+  "bin": {
+    "jcard-to-vcard": "./cli.js"
+  },
+  "engines": {
+    "node": ">=4.0"
+  },
   "main": "cli.js",
   "scripts": {
-    "test": "mocha"
+    "test": "gulp && mocha"
   },
   "keywords": [
     "jCard",
@@ -26,6 +32,7 @@
     "@radioactivehamster/date-time": "^0.1.2",
     "chalk": "^1.1.1",
     "collapse-date-time": "^0.1.2",
+    "is-vcard-date-time-type": "^0.1.0",
     "is_js": "^0.8.0",
     "lodash": "^4.6.1",
     "sprintf-js": "^1.0.3"

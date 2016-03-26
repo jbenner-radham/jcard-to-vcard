@@ -14,7 +14,7 @@ This is still very much a WIP project and is __*not*__ feature complete.
 ## Usage
 
 ```sh
-$ node dist/cli.js jcard.json > vcard.vcf
+$ node cli.js jcard.json > vcard.vcf
 ```
 
 ## To-Do
