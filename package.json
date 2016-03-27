@@ -32,6 +32,7 @@
     "@radioactivehamster/date-time": "^0.1.2",
     "chalk": "^1.1.1",
     "collapse-date-time": "^0.1.2",
+    "escape-vcard-property-value": "^0.1.0",
     "is-vcard-date-time-type": "^0.1.0",
     "is_js": "^0.8.0",
     "lodash": "^4.6.1",
