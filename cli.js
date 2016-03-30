@@ -1,14 +1,14 @@
 'use strict';
 
-let chalk            = require('chalk');
-let foldLine         = require('./lib/fold-line');
-let fs               = require('fs');
-let is               = require('is_js');
-let isValidOctetSize = require('./lib/is-valid-octet-size');
-let isVcardProperty  = require('./lib/is-vcard-property');
-let vco              = require('./lib/vcard');
+const chalk            = require('chalk');
+const foldLine         = require('./lib/fold-line');
+const fs               = require('fs');
+const is               = require('is_js');
+const isValidOctetSize = require('./lib/is-valid-octet-size');
+const isVcardProperty  = require('./lib/is-vcard-property');
+const VcardProperty    = require('./lib/vcard-property');
 
-const MAX_OCTETS = 75;
+const CRLF = '\r\n';
 
 let source = fs.readFileSync(process.argv[2]).toString();
 let jcard  = JSON.parse(source).pop();
@@ -16,19 +16,15 @@ let vcard  = [ 'BEGIN:VCARD' ];
 
 jcard.forEach(item => {
     // let [prop, param, type, val] = item;
-    let prop  = item[0];
-    let param = item[1];
-    let type  = item[2];
-    let val   = item[3];
+    let name       = item[0];
+    let parameters = item[1];
+    let type       = item[2];
+    let value      = item[3];
 
-    /**
-     * Change the `Property` contructor to use array destructing since the jCard
-     * properties will always be in the same order and structure?
-     */
-    let property = new vco.Property({
-        name:       prop,
-        parameters: param,
-        value:      val,
+    let property = new VcardProperty({
+        name:       name,
+        parameters: parameters,
+        value:      value,
         valueType:  type
     });
 
@@ -41,8 +37,8 @@ jcard.forEach(item => {
     vcard.push(line);
 });
 
-vcard.push(`VCARD:END${vco.CRLF}`);
-process.stdout.write(vcard.join(vco.CRLF));
+vcard.push(`VCARD:END${CRLF}`);
+process.stdout.write(vcard.join(CRLF));
 
 /**
  * Normative References
