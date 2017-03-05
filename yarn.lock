@@ -635,6 +635,10 @@ generate-object-property@^1.1.0:
   dependencies:
     is-property "^1.0.0"
 
+get-json-basename@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/get-json-basename/-/get-json-basename-0.1.0.tgz#76b67713152ef0c2a3dbcad2825093d4023ea232"
+
 get-stdin@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-4.0.1.tgz#b968c6b0a04384324902e8bf1a5df32579a450fe"

@@ -500,6 +500,9 @@
       "version": "1.2.0",
       "dev": true
     },
+    "get-json-basename": {
+      "version": "0.1.0"
+    },
     "get-stdin": {
       "version": "4.0.1",
       "dev": true
