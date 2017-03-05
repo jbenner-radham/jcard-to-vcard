@@ -3,7 +3,6 @@
 const chalk            = require('chalk');
 const foldLine         = require('./lib/fold-line');
 const fs               = require('fs');
-const is               = require('is_js');
 const isValidOctetSize = require('./lib/is-valid-octet-size');
 const isVcardProperty  = require('./lib/is-vcard-property');
 const VCardProperty    = require('./lib/vcard-property');
