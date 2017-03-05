@@ -4,21 +4,31 @@ jcard-to-vcard
 [![GitHub License][LICENSE BADGE]][LICENSE PAGE]
 [![Build Status][BUILD BADGE]][BUILD PAGE]
 
-A jCard to vCard converter. Currently CLI only but will have a programmatic
-module interface in the future.
+A jCard to vCard converter with both a CLI and a programmatic module interface.
 
-## Heads Up!
-
+Heads Up!
+---------
 This is still very much a WIP project and is __*not*__ feature complete.
 
-## Usage
+Usage
+-----
+#### Programmatically
+```js
+const fs           = require('fs');
+const jCardToVCard = require('jcard-to-vcard');
 
-```sh
-$ node cli.js jcard.json > vcard.vcf
+let source = fs.readFileSync('jcard.json').toString();
+let jcard  = JSON.parse(source);
+let vcard  = jCardToVCard(jcard);
 ```
 
-## To-Do
+#### CLI
+```sh
+$ jcard-to-vcard jcard.json > vcard.vcf
+```
 
+To-Do
+-----
 - [ ] Property Parsing
   - [x] `ADR`
   - [x] `ANNIVERSARY`
@@ -71,8 +81,8 @@ $ node cli.js jcard.json > vcard.vcf
   - [ ] `TZ`
   - [ ] `VALUE`
 
-## Reference
-
+Reference
+---------
 - [Augmented BNF for Syntax Specifications: ABNF](http://tools.ietf.org/html/rfc5234)
 - [vCard Format Specification](http://tools.ietf.org/html/rfc6350)
   - [Errata](http://www.rfc-editor.org/errata_search.php?rfc=6350)
@@ -80,8 +90,8 @@ $ node cli.js jcard.json > vcard.vcf
 - [jCard: The JSON Format for vCard](http://tools.ietf.org/html/rfc7095)
 - [vCard Elements (IANA Protocol Registry)](http://www.iana.org/assignments/vcard-elements/vcard-elements.xhtml)
 
-## License
-
+License
+-------
 This project is licensed under the terms of the [MIT License (Expat)](https://tldrlegal.com/l/mit). You can view the full license [here](LICENSE).
 
 [BUILD BADGE]: https://img.shields.io/travis/jbenner-radham/jcard-to-vcard.svg?style=flat-square

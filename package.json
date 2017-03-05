@@ -1,7 +1,7 @@
 {
   "name": "jcard-to-vcard",
-  "version": "0.0.0",
-  "description": "jCard magic thingy.",
+  "version": "0.1.0",
+  "description": "A jCard to vCard converter with both a CLI and a programmatic module interface.",
   "bin": {
     "jcard-to-vcard": "./cli.js"
   },
@@ -13,6 +13,8 @@
     "test": "gulp && mocha"
   },
   "keywords": [
+    "CLI",
+    "converter",
     "jCard",
     "vCard",
     "JSON"
