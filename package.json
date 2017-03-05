@@ -6,7 +6,7 @@
     "jcard-to-vcard": "./cli.js"
   },
   "engines": {
-    "node": ">=4.0"
+    "node": ">=4.8"
   },
   "main": "cli.js",
   "scripts": {
