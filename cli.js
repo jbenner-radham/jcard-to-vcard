@@ -1,40 +1,14 @@
 'use strict';
 
-const chalk            = require('chalk');
-const foldLine         = require('./lib/fold-line');
-const fs               = require('fs');
-const isValidOctetSize = require('./lib/is-valid-octet-size');
-const isVcardProperty  = require('./lib/is-vcard-property');
-const VCardProperty    = require('./lib/vcard-property');
-
-const CRLF = '\r\n';
+const fs           = require('fs');
+const jCardToVCard = require('./lib');
 
 let filename = process.argv[2];
 let source   = fs.readFileSync(filename).toString();
-let jcard    = JSON.parse(source).pop();
-let vcard    = [ 'BEGIN:VCARD' ];
+let jcard    = JSON.parse(source);
+let vcard    = jCardToVCard(jcard);
 
-jcard.forEach(item => {
-    let [name, parameters, type, value] = item;
-
-    let property = new VCardProperty({
-        name:       name,
-        parameters: parameters,
-        value:      value,
-        valueType:  type
-    });
-
-    let line = property.toString();
-
-    if (!isValidOctetSize(line)) {
-        line = foldLine(line);
-    }
-
-    vcard.push(line);
-});
-
-vcard.push(`VCARD:END${CRLF}`);
-process.stdout.write(vcard.join(CRLF));
+process.stdout.write(vcard);
 
 /**
  * Normative References
