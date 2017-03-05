@@ -82,7 +82,7 @@ $ node cli.js jcard.json > vcard.vcf
 
 ## License
 
-This project is licensed under the terms of the [MIT License](https://tldrlegal.com/l/mit). You can view the full license [here](README.md).
+This project is licensed under the terms of the [MIT License (Expat)](https://tldrlegal.com/l/mit). You can view the full license [here](README.md).
 
 [BUILD BADGE]: https://img.shields.io/travis/jbenner-radham/jcard-to-vcard.svg?style=flat-square
 [BUILD PAGE]: https://travis-ci.org/jbenner-radham/jcard-to-vcard
