@@ -1,7 +1,6 @@
 {
   "libs": [
     "chai",
-    "ecma5",
     "ecma6"
   ],
   "loadEagerly": [
