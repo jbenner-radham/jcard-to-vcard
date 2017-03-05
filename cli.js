@@ -6,22 +6,19 @@ const fs               = require('fs');
 const is               = require('is_js');
 const isValidOctetSize = require('./lib/is-valid-octet-size');
 const isVcardProperty  = require('./lib/is-vcard-property');
-const VcardProperty    = require('./lib/vcard-property');
+const VCardProperty    = require('./lib/vcard-property');
 
 const CRLF = '\r\n';
 
-let source = fs.readFileSync(process.argv[2]).toString();
-let jcard  = JSON.parse(source).pop();
-let vcard  = [ 'BEGIN:VCARD' ];
+let filename = process.argv[2];
+let source   = fs.readFileSync(filename).toString();
+let jcard    = JSON.parse(source).pop();
+let vcard    = [ 'BEGIN:VCARD' ];
 
 jcard.forEach(item => {
-    // let [prop, param, type, val] = item;
-    let name       = item[0];
-    let parameters = item[1];
-    let type       = item[2];
-    let value      = item[3];
+    let [name, parameters, type, value] = item;
 
-    let property = new VcardProperty({
+    let property = new VCardProperty({
         name:       name,
         parameters: parameters,
         value:      value,
