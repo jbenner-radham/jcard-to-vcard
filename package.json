@@ -30,7 +30,6 @@
   },
   "dependencies": {
     "@radioactivehamster/date-time": "^0.1.2",
-    "chalk": "^1.1.1",
     "collapse-date-time": "^0.1.2",
     "escape-vcard-property-value": "^0.1.0",
     "get-json-basename": "^0.1.0",
