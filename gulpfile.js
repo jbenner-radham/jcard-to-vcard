@@ -1,8 +1,8 @@
 'use strict';
 
 const eslint = require('gulp-eslint');
-const gulp   = require('gulp');
-const micro  = require('gulp-micro');
+const gulp = require('gulp');
+const micro = require('gulp-micro');
 
 gulp.task('js', () => {
     return gulp.src('lib/**/*.js')

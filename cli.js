@@ -2,13 +2,13 @@
 
 'use strict';
 
-const fs           = require('fs');
-const jCardToVCard = require('./lib');
+const fs = require('fs');
+const jcardToVcard = require('./lib');
 
 let filename = process.argv[2];
-let source   = fs.readFileSync(filename).toString();
-let jcard    = JSON.parse(source);
-let vcard    = jCardToVCard(jcard);
+let source = fs.readFileSync(filename).toString();
+let jcard = JSON.parse(source);
+let vcard = jcardToVcard(jcard);
 
 process.stdout.write(vcard);
 
