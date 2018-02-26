@@ -35,9 +35,6 @@
     "escape-vcard-property-value": "^0.1.0",
     "get-json-basename": "^0.1.0",
     "is-json-file": "^0.2.0",
-    "is-vcard-date-time-type": "^0.1.0",
-    "is_js": "^0.8.0",
-    "lodash": "^4.6.1",
-    "sprintf-js": "^1.0.3"
+    "is-vcard-date-time-type": "^0.1.0"
   }
 }
