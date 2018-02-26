@@ -1687,6 +1687,13 @@
       "integrity": "sha1-AjPYgxbJwkeNv2j1/4j4/Snx8tI=",
       "requires": {
         "is_js": "0.8.0"
+      },
+      "dependencies": {
+        "is_js": {
+          "version": "0.8.0",
+          "resolved": "https://registry.npmjs.org/is_js/-/is_js-0.8.0.tgz",
+          "integrity": "sha1-kCOsjhc5o5b78KoP79RiZOrw+aI="
+        }
       }
     },
     "is-windows": {
@@ -1696,9 +1703,9 @@
       "dev": true
     },
     "is_js": {
-      "version": "0.8.0",
-      "resolved": "https://registry.npmjs.org/is_js/-/is_js-0.8.0.tgz",
-      "integrity": "sha1-kCOsjhc5o5b78KoP79RiZOrw+aI="
+      "version": "0.9.0",
+      "resolved": "https://registry.npmjs.org/is_js/-/is_js-0.9.0.tgz",
+      "integrity": "sha1-CrlFQFArp6+iTIVqqYVWFmnpxS0="
     },
     "isarray": {
       "version": "1.0.0",
