@@ -10,21 +10,35 @@ Heads Up!
 ---------
 This is still very much a WIP project and is __*not*__ feature complete.
 
+Install
+-------
+```sh
+$ yarn global add jcard-to-vcard # Or alternatively: `npm install --global jcard-to-vcard`
+```
+
 Usage
 -----
 #### Programmatically
 ```js
-const fs           = require('fs');
-const jCardToVCard = require('jcard-to-vcard');
+'use strict';
+
+const fs = require('fs');
+const jcardToVcard = require('jcard-to-vcard');
 
 let source = fs.readFileSync('jcard.json').toString();
-let jcard  = JSON.parse(source);
-let vcard  = jCardToVCard(jcard);
+let jcard = JSON.parse(source);
+let vcard = jcardToVcard(jcard);
 ```
 
 #### CLI
 ```sh
 $ jcard-to-vcard jcard.json > vcard.vcf
+```
+
+Testing
+-------
+```sh
+$ yarn test # Or alternatively: `npm test`
 ```
 
 To-Do
