@@ -10,6 +10,7 @@
   },
   "main": "lib/index.js",
   "scripts": {
+    "lint": "eslint {lib,test} *.js",
     "test": "gulp && mocha"
   },
   "keywords": [
@@ -22,11 +23,12 @@
   "author": "James Benner <james.benner@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.11.1",
     "gulp": "^4.0.0",
     "gulp-eslint": "^5.0.0",
     "gulp-micro": "^2.0.0",
-    "mocha": "^2.4.5"
+    "mocha": "^5.2.0"
   },
   "dependencies": {
     "@radioactivehamster/date-time": "^0.1.2",

@@ -1,14 +1,14 @@
 'use strict';
 
-const expect        = require('chai').expect;
+const { expect } = require('chai');
 const VcardProperty = require('../lib/vcard-property');
 
 describe('vCard Property', () => {
-    let vcardProperty = new VcardProperty({
-        name:       'fn',
+    const vcardProperty = new VcardProperty({
+        name: 'fn',
         parameters: {},
-        value:      'John Smith',
-        valueType:  'text'
+        value: 'John Smith',
+        valueType: 'text'
     });
 
     it('should have a property named "name"', () => {
