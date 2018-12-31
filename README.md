@@ -94,6 +94,7 @@ To-Do
   - [ ] `TYPE`
   - [ ] `TZ`
   - [ ] `VALUE`
+- [ ] Refactor Codebase
 
 Reference
 ---------
