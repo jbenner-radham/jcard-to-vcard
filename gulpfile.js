@@ -1,14 +1,12 @@
 'use strict';
 
 const eslint = require('gulp-eslint');
-const gulp = require('gulp');
 const micro = require('gulp-micro');
+const { src } = require('gulp');
 
-gulp.task('js', () => {
-    return gulp.src('lib/**/*.js')
+module.exports.default = function() {
+    return src('lib/**/*.js')
         .pipe(micro({limit: 2500}))
         .pipe(eslint())
         .pipe(eslint.failAfterError());
-});
-
-gulp.task('default', ['js']);
+};
