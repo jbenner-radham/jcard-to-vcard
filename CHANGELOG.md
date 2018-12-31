@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 [Unreleased]
 ------------
+### Fixed
+- Generated vCards are now properly terminated with the `END:VCARD` property as
+  per [RFC 6350 § 6.1.2](https://tools.ietf.org/html/rfc6350#section-6.1.2).
+
 ### Removed
 - Reduced the number of project dependencies.
 
