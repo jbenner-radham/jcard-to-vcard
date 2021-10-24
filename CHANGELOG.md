@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Update supported [Node.js](https://nodejs.org/) version to `^6.2.2 || >=8`.
 
+### Fixed
+- The `foldLine` function will no longer try to fold lines which do not exceed the max octets line limit.
+- The `VcardPropertyParameters` class now stringifies all parameters.
+
 [0.1.1] - 2019-12-31
 --------------------
 ### Changed
