@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - The `foldLine` function will no longer try and fold lines which do not exceed the max octets line limit.
+- The `VcardPropertyParameters` class now stringifies all parameters.
 
 [0.1.1] - 2019-12-31
 --------------------
