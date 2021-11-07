@@ -32,6 +32,6 @@ describe('stringifyParameters', () => {
         const actual = stringifyParameters(property.parameters);
         const expected = ['TYPE=home,voice'];
 
-        expect(actual).to.equal(expected);
+        expect(actual).to.eql(expected);
     });
 });
