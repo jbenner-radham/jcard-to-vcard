@@ -1,6 +1,6 @@
 {
   "name": "jcard-to-vcard",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A jCard to vCard converter with both a CLI and a programmatic module interface.",
   "keywords": [
     "CLI",
