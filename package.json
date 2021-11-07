@@ -5,6 +5,9 @@
   "bin": {
     "jcard-to-vcard": "./cli.js"
   },
+  "files": [
+    "lib/"
+  ],
   "engines": {
     "node": "^6.2.2 || >=8"
   },
